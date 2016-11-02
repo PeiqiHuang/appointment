@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="time" namespace="/time" extends="struts-default">
+        
+        <!-- security operation, need to login -->
+		<interceptors>
+			<interceptor name="authenticationInterceptor" class="appointment.util.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authenticationInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+				
+		<default-interceptor-ref name="secureStack"/>
+
+		<global-results>
+			<result name="login" type="redirectAction">
+   				<param name="namespace">/</param>
+				<param name="actionName">loginForm</param>
+			</result>
+		</global-results>
+		
+        <action name="insert" method="insert"  class="appointment.time.TimeAction">
+   			<result>/jsp/time/insert.jsp</result>
+		</action>  	  
+        <action name="submit" method="submit" class="appointment.time.TimeAction">
+   			<result name="input">/jsp/time/insert.jsp</result>
+   			<result name="success" type="redirectAction">show</result>
+		</action>  	  
+        <action name="show" method="show" class="appointment.time.TimeAction">
+   			<result name="input">/jsp/time/insert.jsp</result>
+   			<result name="success">/jsp/time/show.jsp</result>
+		</action>  	  
+        <action name="del" method="del" class="appointment.time.TimeAction">
+   			<result type="redirectAction">show</result>
+		</action>  	  
+    </package>
+</struts>    

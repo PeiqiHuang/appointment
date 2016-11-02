@@ -1,0 +1,99 @@
+<%@ page contentType="text/html; charset=UTF-8"  %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
+<html>
+	<head>
+    	<title>预约时间段管理</title>
+    	<sb:head/>
+	</head>
+
+	<body style="padding:10px;" class="well">
+		<div class="container ">
+			<div class="row ">
+		  		<div class="span12">
+				  <table class="table table-striped table-bordered">
+			  		<thead>
+			  			<tr>
+			  				<th><s:text name="time"/></th>
+			  				<th><s:text name="description"/></th>
+			  				<th><s:text name="count"/></th>
+			  				<th colspan="2"><button   class="btn btn-block" name="add"><s:text name="add"/></button></th>
+			  			</tr>
+					</thead>	
+					<tbody>
+						<s:iterator value="times">
+							<tr>
+								<td><s:property value="time" /> </td>
+								<td><s:property value="description" /> </td>
+								<td><s:property value="count" /> </td>
+								<td><button   class="btn btn-block" name="update" value="<s:property value="id" />"><s:text name="update"/></button></td>
+								<td><button   class="btn btn-block" name="del" value="<s:property value="id" />"><s:text name="del"/></button></td>
+							</tr>
+						</s:iterator>
+					</tbody>
+				  </table>
+			  </div>
+			  <div class="span12">
+			  	<s:form id="form_board" action="../board/set" >
+				  	<s:textarea cssStyle="width:100%" key="board" />
+				  	<ul id="tips" style="font-size:17px">
+				  		<li>18点之后开放明天的预约，请耐心等候！</li>
+				  		<li>19点之后开放明天的预约，请耐心等候！</li>
+				  		<li>明天休息，预约暂停！</li>
+				  		<li>明天的预约已满</li>
+				  		<li>明天的预约已满，请明晚18点之后预约后天的号！</li>
+				  	</ul>
+				  	<button class="btn btn-large" id="clear">清空</button>
+				  	<s:submit cssClass="btn btn-large" value="发布公告" />
+			  	</s:form>
+			  </div>
+		  </div>
+	  </div>
+	  
+	  <s:form id="form">
+	  	<s:hidden name="id" />
+	  	<s:hidden name="time" />
+	  	<s:hidden name="description" />
+	  	<s:hidden name="count" />
+	  </s:form>
+	</body>
+	
+	<script src="../js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			/* add */
+			$("button[name='add']").click(function() {
+				/* window.open("insert", 'newwindow', 'height=200, width=300, modal=yes,status=no'); */
+				window.location.href="insert";
+			});
+			/* update */
+			$("button[name='update']").click(function() {
+				$("#form_id").val($(this).val().trim());
+				var $tds = $(this).parent().parent().children();
+				$("#form_time").val($tds.first().text().trim());
+				$("#form_description").val($tds.eq(1).text().trim());
+				$("#form_count").val($tds.eq(2).text().trim());
+				$("#form").attr("action", "insert");
+				$("#form").submit();
+			});
+			/* delete */
+			$("button[name='del']").click(function() {
+				var con = confirm("确定删除?");
+				if (con) {
+					$("#form_id").val($(this).val().trim());
+					$("#form").attr("action", "del");
+					$("#form").submit();
+				}
+			});
+			
+			$("#clear").click(function(){
+				$("#form_board_board").val("");
+			});
+			
+			$("#tips li").click(function(){
+				$("#form_board_board").val($(this).text());
+			});
+		})
+	</script>
+	
+</html>

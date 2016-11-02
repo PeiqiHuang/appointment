@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <!-- <package name="board" namespace="/board" extends="struts-default">
+        <action name="get" method="get" class="appointment.board.BoardAction">
+   			<result>/jsp/time/show.jsp</result>
+		</action>  	  
+    </package> -->
+    
+    <package name="board" namespace="/board" extends="struts-default">
+    
+		<interceptors>
+			<interceptor name="authenticationInterceptor" class="appointment.util.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authenticationInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+				
+		<default-interceptor-ref name="secureStack"/>
+
+		<global-results>
+			<result name="login" type="redirectAction">
+   				<param name="namespace">/</param>
+				<param name="actionName">loginForm</param>
+			</result>
+		</global-results>
+		
+        <action name="set" method="set" class="appointment.board.BoardAction">
+   			<result type="redirectAction">
+				<param name="namespace">/time</param>
+				<param name="actionName">show</param>
+			</result>
+		</action>  	  
+    </package>
+</struts>    

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+	xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd" xmlns:tx="http://www.springframework.org/schema/tx">
+
+
+	<bean id="dataSource"
+		class="org.apache.commons.dbcp.BasicDataSource">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
+        <!-- <property name="url" value="jdbc:mysql://localhost:3306/appointment" />
+        <property name="username" value="root" />
+        <property name="password" value="" />	 -->
+        <property name="url" value="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_appointment" />
+        <property name="username" value="3kjw2lxzoo" />
+        <property name="password" value="hh53wiyzx2l12jh404kyy05xmyxh4whjz3401mw0" />
+        <property name="validationQuery" value="SELECT 1" />
+    	<property name="testOnBorrow" value="true"/>
+        <!-- 配置初始化大小、最小、最大 -->  
+        <property name="initialSize" value="1" />  
+        <property name="minIdle" value="1" />  
+        <property name="maxActive" value="20" />  
+        <!-- 配置获取连接等待超时的时间 -->  
+        <property name="maxWait" value="60000" /> 
+	</bean>
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
+		<property name="dataSource">
+			<ref bean="dataSource" />
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<!-- 指定Hibernate的连接方言 -->  
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>  
+                <!--是否根据Hiberante映射创建数据表 -->  
+                <prop key="hibernate.hbm2ddl.auto">update</prop>  
+                <prop key="hibernate.show_sql">false</prop>  
+                <prop key="hibernate.format_sql">true</prop>  
+                <prop key="hibernate.autoReconnect">true</prop>	
+			</props>
+		</property>
+		<property name="annotatedClasses">
+			<list>
+				<value>appointment.time.Time</value>
+				<value>appointment.person.Person</value>
+			</list>
+		</property>
+	</bean>
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate4.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+	
+	<!-- DAO -->
+	<bean id="timeDAO" class="appointment.time.TimeDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	<bean id="personDAO" class="appointment.person.PersonDAO">
+		<property name="sessionFactory">
+			<ref bean="sessionFactory" />
+		</property>
+	</bean>
+	
+	<!-- Appointment Service -->
+	<bean id="appointmentService" class="appointment.AppointmentServiceImpl">
+		<property name="timeDAO">
+			<ref bean="timeDAO" />
+		</property>
+		<property name="personDAO">
+			<ref bean="personDAO" />
+		</property>
+	</bean>
+	
+	</beans>

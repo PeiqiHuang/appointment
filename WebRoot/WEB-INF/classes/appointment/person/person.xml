@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="person" namespace="/person" extends="struts-default">
+        <action name="availableTime" method="availableTime" class="appointment.person.PersonAction">
+   			<result>/jsp/person/availableTime.jsp</result>
+		</action>  	  
+        <action name="insert" class="appointment.person.PersonInsertAction">
+   			<result>/jsp/person/insert.jsp</result>
+		</action>  	  
+        <action name="submit" class="appointment.person.PersonSubmitAction">
+   			<result name="success" type="redirectAction">
+				<param name="actionName">tip</param>
+				<param name="phone">${phone}</param>
+			</result>
+   			<result name="main"  type="redirectAction">
+   				<param name="namespace">/person/manage</param>
+				<param name="actionName">show</param>
+			</result>
+   			<result name="input" >/jsp/person/insert.jsp</result>
+		</action>  	  
+        <action name="success">
+   			<result>/jsp/person/success.jsp</result>
+		</action>  	  	  
+        <action name="searchForm">
+   			<result>/jsp/person/search.jsp</result>
+		</action>  	  	  
+        <action name="tip" class="appointment.person.PersonSearchAction">
+   			<result>/jsp/person/tip.jsp</result>
+		</action>  	  	  
+    </package>
+    
+    <package name="personManage" namespace="/person/manage" extends="struts-default">
+    
+    	<!-- ajax json result -->
+		<result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+        
+		<interceptors>
+			<interceptor name="authenticationInterceptor" class="appointment.util.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authenticationInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+				
+		<default-interceptor-ref name="secureStack"/>
+
+		<global-results>
+			<result name="login" type="redirectAction">
+   				<param name="namespace">/</param>
+				<param name="actionName">loginForm</param>
+			</result>
+		</global-results>
+		
+        <action name="show" class="appointment.person.PersonShowAction">
+   			<result>/jsp/personManage/show.jsp</result>
+		</action>  	  
+        <action name="del" class="appointment.person.PersonDeleteAction">
+   			<result type="redirectAction">show</result>
+		</action> 
+		
+		<!-- ajax -->
+        <action name="getPersonsByDate" method="getPersonsByDate" class="appointment.person.PersonAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+   				<!-- <param name="excludeProperties">person.time</param> -->
+   				<!-- <param name="includeProperties">persons\[\d+\]\.id</param> -->
+  			</result>
+		</action> 
+		 	  
+    </package>
+</struts>    
