@@ -18,9 +18,6 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.sun.xml.internal.ws.api.Cancelable;
-import com.sun.xml.internal.ws.policy.privateutil.PolicyUtils.Collections;
-
 /**
  * A data access object (DAO) providing persistence and search support for
  * Person entities. Transaction control of the save(), update() and delete()
