@@ -1,17 +1,14 @@
 package appointment.person;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import org.apache.struts2.json.annotations.JSON;
 
 import appointment.time.Time;
 
@@ -31,7 +28,7 @@ public class Person implements java.io.Serializable {
 	private String age;
 	private String phone;
 	private Integer paid = 0;
-	private Timestamp date;
+	private Date date;
 
 	// Constructors
 
@@ -41,7 +38,7 @@ public class Person implements java.io.Serializable {
 
 	/** full constructor */
 	public Person(Time time, String name, Boolean gender, String age,
-			String phone, Integer paid, Timestamp date) {
+			String phone, Integer paid, Date date) {
 		this.time = time;
 		this.name = name;
 		this.gender = gender;
@@ -120,14 +117,15 @@ public class Person implements java.io.Serializable {
 	}
 
 	@Column(name = "date", nullable = false, length = 19, updatable=false)
-	public Timestamp getDate() {
+	public Date getDate() {
 		if (null == date) {
-    		return new Timestamp(System.currentTimeMillis());
+//    		return new Timestamp(System.currentTimeMillis());
+    		return new Date();
     	}
 		return this.date;
 	}
 
-	public void setDate(Timestamp date) {
+	public void setDate(Date date) {
 		this.date = date;
 	}
 

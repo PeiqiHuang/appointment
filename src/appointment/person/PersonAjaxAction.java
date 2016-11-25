@@ -18,7 +18,7 @@ public class PersonAjaxAction extends ActionSupport {
 //		System.out.println("getPersonsByDate persons -> " + persons);
 		Gson gson = new GsonBuilder().setDateFormat("HH:mm").create();
 		result = gson.toJson(persons);
-		System.out.println("getPersonsByDate persons = " + result);
+//		System.out.println("getPersonsByDate persons = " + result);
 		return SUCCESS;
 	}
 	

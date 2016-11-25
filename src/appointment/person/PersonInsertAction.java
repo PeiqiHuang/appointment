@@ -33,7 +33,7 @@ public class PersonInsertAction extends ActionSupport implements ModelDriven<Per
 	}
 	
 	private void updatePersonDate(String addDate) {
-		System.out.println("updatePersonDate addDate = " + addDate);
+//		System.out.println("updatePersonDate addDate = " + addDate);
 		if (null == addDate) {
 			return;
 		}
@@ -58,7 +58,7 @@ public class PersonInsertAction extends ActionSupport implements ModelDriven<Per
         if(year1 == year2 && month1 == month2 && day1 == day2){
         	return;
         } else {
-        	System.out.println("updatePersonDate set Date = " + year1 + " " + month1 + " " +day1);
+//        	System.out.println("updatePersonDate set Date = " + year1 + " " + month1 + " " +day1);
         	person.setDate(new Timestamp(d1.getTime()));
         }
 	}

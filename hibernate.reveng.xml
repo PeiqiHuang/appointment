@@ -2,9 +2,13 @@
 <!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd" >
 
 <hibernate-reverse-engineering>
-<table name="time" catalog="appointment" class="Time">
-	<primary-key>
-		<generator class="native"></generator>
-	</primary-key>
-</table>
+
+	<table name="time" catalog="appointment" class="Time">
+		<primary-key>
+			<generator class="native"></generator>
+		</primary-key>
+	</table>
+	<table name="buy" catalog="appointment"></table>
+	<table name="buyer" catalog="appointment"></table>
+	<table name="product" catalog="appointment"></table>
 </hibernate-reverse-engineering>

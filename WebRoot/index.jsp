@@ -124,7 +124,7 @@
 			      	</a>
 			      </li>
 			      <li class="span12" style="margin-left:0">
-			      	<a href="http://mp.weixin.qq.com/s?__biz=MjM5NjI3MTExNg==&mid=2451146050&idx=1&sn=0c363dcd46deaf61e5d9afc4c095dd79">
+			      	<a href="http://mp.weixin.qq.com/s?__biz=MjM5NjI3MTExNg==&mid=303662400&idx=1&sn=25384703e8b8e36b29ed0884babd61d5&chksm=3106e023067169350cf5144b2f6c4332787c2cc2c291183bfaddb85db73d8ced240aa44bdf70&scene=0#wechat_redirect">
 				        <div class="thumbnail">
 				          <img width="100%" src="http://appointment-img.stor.sinaapp.com/fumeiling.jpg">
 				          <h4>肤美灵洗面奶 <small>¥14</small></h4>
@@ -174,10 +174,10 @@
 			      	</a>
 			      </li>		        
 			      <li class="span12" style="margin-left:0">
-			      	<a href="http://mp.weixin.qq.com/s?__biz=MjM5NjI3MTExNg==&mid=2451146160&idx=1&sn=8f19aec9fbd30527c9c4297677919b4b">
+			      	<a href="http://mp.weixin.qq.com/s?__biz=MjM5NjI3MTExNg==&mid=303662484&idx=1&sn=6809a7b25176b22074c76ea34414e99b&chksm=3106e0f7067169e19fef75b7e907803d243f56d557547b098ce24ba759386907c9c1d18e88b3&scene=0#wechat_redirect">
 				        <div class="thumbnail">
 				          <img width="100%" src="http://appointment-img.stor.sinaapp.com/runfukang.jpg">
-				          <h4>美卿皮肤修复贴敷料 <small>¥95</small></h4>
+				          <h4>美卿皮肤修复贴敷料 <small>¥110</small></h4>
 				          <p>治疗皮肤过敏，促进皮肤修复<br>适用于轻中度炎症较轻痤疮、痤疮愈后早期色素沉着</p>
 				          <hr>
 				          <p>→进入了解更多</p>

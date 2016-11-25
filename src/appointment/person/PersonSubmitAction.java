@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ModelDriven;
 public class PersonSubmitAction extends ActionSupport implements ModelDriven<Person> {
 	
 	public String execute() {
-		System.out.println("submit -> person -> " + person);
+//		System.out.println("submit -> person -> " + person);
 		appointmentService.savePerson(person);
 		if (null != person.getId())
 			return "main";

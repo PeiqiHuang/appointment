@@ -25,11 +25,13 @@
         
 		  <s:form id="form" action="tip" theme="bootstrap" cssClass="well form-vertical" label="请输入预约电话查询">
 		  	<s:textfield key="phone" />
-		  	<s:submit key="submit" cssClass="btn btn-success btn-block" />
+		  	<s:submit value="查询" key="submit" cssClass="btn btn-success btn-block" />
 		  </s:form>
-		  
-		  
-			  
 	</body>
-	
+	<script src="../js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$("input").css("height", "40px");
+		})
+	</script>
 </html>

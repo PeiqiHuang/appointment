@@ -1,13 +1,13 @@
 #MyEclipse Hibernate Properties
-#Fri Aug 05 22:30:37 CST 2016
+#Wed Nov 09 09:33:23 CST 2016
 genBasicCompId=true
 sessionFactoryName=
 profile=
 daoSFId=sessionFactory
 jndiPath=
-detectM2M=false
+detectM2M=true
 reStrategyClass=
-detectO2O=true
+detectO2O=false
 springDaoFile=WebRoot/WEB-INF/applicationContext.xml
 useJavaTypes=true
 keyGenerator=native
@@ -15,6 +15,6 @@ genVersionTag=false
 sessionFactoryId=sessionFactory
 basePersistenceClass=
 genAnnotations=true
-reSettingsFile=/SSHDemo/hibernate.reveng.xml
+reSettingsFile=/Appointment/hibernate.reveng.xml
 configFile=/SSHDemo/WebRoot/WEB-INF/applicationContext.xml
 createConfigFile=true

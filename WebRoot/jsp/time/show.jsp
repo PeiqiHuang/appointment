@@ -3,14 +3,39 @@
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <html>
 	<head>
-    	<title>预约时间段管理</title>
+    	<title>时间段管理</title>
     	<sb:head/>
+	    <style>
+			a {
+				color:black;
+			}
+			a:link{
+				text-decoration:none;
+			}
+			table {
+				margin-top: 10px
+			}
+	    </style>
 	</head>
 
-	<body style="padding:10px;" class="well">
+	<body style="margin:0px">
 		<div class="container ">
 			<div class="row ">
 		  		<div class="span12">
+		  			<ul class="nav nav-tabs">
+				      <li>
+					      <a href='../person/manage/show'>挂号管理</a>
+		     		  </li>	
+				      <li class="active">
+				        <a href='./show'><strong>时间段管理</strong></a>
+				      </li>
+				      <li>
+					      <a href='../product/manage/order'>订单管理</a>
+		     		  </li>	
+				      <li>
+					      <a href='../product/manage/all'>产品管理</a>
+		     		  </li>	
+				    </ul>
 				  <table class="table table-striped table-bordered">
 			  		<thead>
 			  			<tr>
@@ -32,8 +57,6 @@
 						</s:iterator>
 					</tbody>
 				  </table>
-			  </div>
-			  <div class="span12">
 			  	<s:form id="form_board" action="../board/set" >
 				  	<s:textarea cssStyle="width:100%" key="board" />
 				  	<ul id="tips" style="font-size:17px">
@@ -61,6 +84,8 @@
 	<script src="../js/jquery.min.js"></script>
 	<script type="text/javascript">
 		$(document).ready(function(){
+			// store tab
+			localStorage.appointment_show_tab = "time";
 			/* add */
 			$("button[name='add']").click(function() {
 				/* window.open("insert", 'newwindow', 'height=200, width=300, modal=yes,status=no'); */

@@ -7,4 +7,5 @@
     <include file="appointment/person/person.xml"/>
     <include file="appointment/user/user.xml"/>
     <include file="appointment/board/board.xml"/>
+    <include file="product/product.xml"/>
 </struts>    

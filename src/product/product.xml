@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="product" namespace="/product" extends="struts-default">
+        <action name="buy" method="buy" class="product.ProductAction">
+   			<result>/jsp/product/buy.jsp</result>
+		</action>  	  
+        <action name="submit" method="submit" class="product.ProductSubmitAction">
+   			<result name="update" type="redirectAction">
+   				<param name="namespace">/product/manage</param>
+				<param name="actionName">order</param>
+   			</result>
+   			<result name="success">/jsp/product/buyinfo.jsp</result>
+		</action>  	  
+        <action name="search">
+   			<result>/jsp/product/search.jsp</result>
+		</action>  	  
+        <action name="searchResult" method="searchResult" class="product.ProductSearchAction">
+   			<result name="success">/jsp/product/buyinfo.jsp</result>
+   			<result name="search">/jsp/product/search.jsp</result>
+		</action>  	  
+        <action name="list" method="list" class="product.ProductAction">
+   			<result>/jsp/product/list.jsp</result>
+		</action>  	  
+    </package>
+    
+    <package name="productManage" namespace="/product/manage" extends="struts-default">
+    
+    	<!-- ajax json result -->
+		<result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+        
+		<interceptors>
+			<interceptor name="authenticationInterceptor" class="appointment.util.AuthenticationInterceptor"/>
+			<interceptor-stack name="secureStack">
+				<interceptor-ref name="authenticationInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+				
+		<default-interceptor-ref name="secureStack"/>
+
+		<global-results>
+			<result name="login" type="redirectAction">
+   				<param name="namespace">/</param>
+				<param name="actionName">loginForm</param>
+			</result>
+		</global-results>
+		
+        <action name="order" class="product.ProductShowAction">
+   			<result>/jsp/product/show.jsp</result>
+		</action>  	  
+        <action name="del" class="product.ProductDeleteAction">
+   			<result type="redirectAction">order</result>
+		</action> 
+		
+        <action name="all" class="product.ProductAllAction">
+   			<result>/jsp/product/all.jsp</result>
+		</action> 
+        <action name="insert" method="insert" class="product.ProductAllAction">
+   			<result>/jsp/product/insert.jsp</result>
+		</action> 
+        <action name="submit" method="submit" class="product.ProductAllAction">
+   			<result name="success" type="redirectAction">all</result>
+		</action> 
+        <action name="pdel" method="del" class="product.ProductAllAction">
+   			<result name="success" type="redirectAction">all</result>
+		</action> 
+		
+		<!-- ajax -->
+        <action name="getBuyersByDate" method="getBuyersByDate" class="product.ProductAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+   				<!-- <param name="excludeProperties">person.time</param> -->
+   				<!-- <param name="includeProperties">persons\[\d+\]\.id</param> -->
+  			</result>
+		</action> 
+        <action name="changeSelectPaid" method="changeSelectPaid" class="product.ProductAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+  			</result>
+		</action> 
+        <action name="changeSelectSent" method="changeSelectSent" class="product.ProductAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+  			</result>
+		</action> 
+		 	  
+    </package>
+</struts>    

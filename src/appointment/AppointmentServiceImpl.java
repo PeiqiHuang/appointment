@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.struts2.ServletActionContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import appointment.person.Person;
 import appointment.person.PersonDAO;
@@ -184,7 +186,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		} else if  (person.getPaid() < 0) {
 			return -3L;
 		}
-		Timestamp ts = person.getDate();
+		Date ts = person.getDate();
 		Date now = new Date();
 //		System.out.println("leftSecond -> ts -> " + ts.getTime());
 		Long leftSecond = now.getTime() - ts.getTime();
@@ -259,6 +261,14 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public List<Person> getPersonsByDate(String date) {
 		return personDAO.getPersonsByDate(date);
+	}
+	
+	public static void main(String[] args) {
+		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
+		 
+		AppointmentService appointmentService = (AppointmentService) context.getBean("appointmentService");
+		
+		System.out.println(appointmentService.getAvailableTime(""));
 	}
 
 }

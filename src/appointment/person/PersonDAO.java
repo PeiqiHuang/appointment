@@ -160,7 +160,7 @@ public class PersonDAO {
 		try {
 			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 			String today = sdf.format(new Date());
-			String queryString = "from Person where date>? order by id";
+			String queryString = "from Person where date>=? order by id";
 			Query queryObject = getCurrentSession().createQuery(queryString)
 					.setTimestamp(0, sdf.parse(today));
 			return queryObject.list();
@@ -238,7 +238,8 @@ public class PersonDAO {
 		 
 		PersonDAO pDao = getFromApplicationContext(context);
 		
-		System.out.println(pDao.getPersonsByDate("2016-09-16"));
+//		System.out.println(pDao.getPersonsByDate("2016-11-7"));
+//		System.out.println(pDao.findToday());
 		
 //		List<Person> list = pDao.findByAge("11");
 		
