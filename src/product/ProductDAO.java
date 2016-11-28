@@ -57,6 +57,7 @@ public class ProductDAO {
 	}
 
 	public void save(Product transientInstance) {
+		System.out.println("save " + transientInstance);
 		log.debug("saving Product instance");
 		try {
 			getCurrentSession().saveOrUpdate(transientInstance);
@@ -148,7 +149,7 @@ public class ProductDAO {
 	public List findAll() {
 		log.debug("finding all Product instances");
 		try {
-			String queryString = "from Product";
+			String queryString = "from Product order by valid desc";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			return queryObject.list();
 		} catch (RuntimeException re) {
@@ -212,15 +213,23 @@ public class ProductDAO {
 	public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		ProductDAO productDAO = (ProductDAO) context.getBean("productDAO");
-		System.out.println(productDAO.queryByPage(1));
-		System.out.println(productDAO.queryByPage(2));
-		System.out.println(productDAO.queryByPage(3));
-		System.out.println(productDAO.queryByPage(4));
+//		System.out.println(productDAO.findAll());
+//		System.out.println(productDAO.queryByPage(1));
+		System.out.println(productDAO.search("安敏滋"));
+//		productDAO.search("优泽");
+//		System.out.println(productDAO.findByName("优泽"));
 		
 	}
 
 	public List<Product> getValidProducts() {
-		return findByValid(1);
+//		return findByValid(1);
+		try {
+			String queryString = "from Product as model where model.valid > 0 order by valid desc";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			throw re;
+		}
 	}
 	
 	public List<String> getLabels() {
@@ -236,7 +245,17 @@ public class ProductDAO {
 	public Page queryByPage(int currentPage) {
 		Page page= PageUtil.createPage(PRODUCT_EVERY_PAGE, getSize(), currentPage);
 		// System.out.println(page);
-		page.setObjectList(BaseDao.queryByPage(getCurrentSession(), "from Product order by id", page));
+		page.setObjectList(BaseDao.queryByPage(getCurrentSession(), "from Product order by valid desc", page));
+		return page;
+	}
+
+	public Page search(String searchPattern) {
+		Page page= PageUtil.createPage(10000, 10000, 1);
+		String hql = "from Product as model where model.name like :param or model.alias like :param order by valid desc";
+		Query q = getCurrentSession().createQuery(hql);
+		q.setString("param", "%" + searchPattern + "%");
+//		page.setObjectList(BaseDao.queryByPage(getCurrentSession(), "from Product as model where model.name like '%"+searchPattern+"%' or model.alias like '%"+searchPattern+"%' order by valid desc", page));
+		page.setObjectList(BaseDao.queryByPage(q, page));
 		return page;
 	}
 }

@@ -14,4 +14,11 @@ public class BaseDao {
 		q.setMaxResults(page.getEveryPage());
 		return q.list();
 	}
+	
+	public static List queryByPage(Query q, final Page page) {
+		
+		q.setFirstResult(page.getBeginIndex());
+		q.setMaxResults(page.getEveryPage());
+		return q.list();
+	}
 }

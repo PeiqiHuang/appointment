@@ -13,7 +13,13 @@ public class ProductAllAction extends ActionSupport implements UserAware{
 
 	public String execute() {
 		// products = productService.getAllProducts();
-		page = productService.queryByPage(getCurrentPage());
+		if (searchPattern != null) {
+			page = productService.search(searchPattern);
+			
+		} else {
+			page = productService.queryByPage(getCurrentPage());
+			
+		}
 		System.out.println(page);
 		return SUCCESS;
 	}
@@ -94,6 +100,16 @@ public class ProductAllAction extends ActionSupport implements UserAware{
 
 	public void setCurrentPage(Integer currentPage) {
 		this.currentPage = currentPage;
+	}
+	
+	private String searchPattern;
+
+	public String getSearchPattern() {
+		return searchPattern;
+	}
+
+	public void setSearchPattern(String searchPattern) {
+		this.searchPattern = searchPattern;
 	}
 
 	private Page page;

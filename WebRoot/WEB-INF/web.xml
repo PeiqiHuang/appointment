@@ -9,17 +9,14 @@
     <welcome-file>default.htm</welcome-file>
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
-  	<!-- 配置struts2核心的过滤器 -->
-  	<!-- 配置Spring的用于解决懒加载问题的过滤器 -->
-	<filter>	
-	    <filter-name>openSessionInViewFilter</filter-name>
-	    <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
-	</filter>
-	<filter-mapping>
-	    <filter-name>openSessionInViewFilter</filter-name>
-	    <url-pattern>/*</url-pattern>
-	</filter-mapping>  
-	
+  <filter>
+    <filter-name>openSessionInViewFilter</filter-name>
+    <filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
+  </filter>
+  <filter-mapping>
+    <filter-name>openSessionInViewFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
   <filter>
     <filter-name>struts2</filter-name>
     <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
@@ -35,5 +32,4 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>WEB-INF/applicationContext.xml</param-value>
   </context-param>
-  	
 </web-app>

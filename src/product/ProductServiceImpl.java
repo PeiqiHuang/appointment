@@ -177,4 +177,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.queryByPage(currentPage);
 	}
 
+	@Override
+	public Page search(String searchPattern) {
+		return productDAO.search(searchPattern);
+	}
+
 }

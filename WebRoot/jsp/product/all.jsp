@@ -36,8 +36,12 @@
 					      <a href='./all'><strong>产品管理</strong></a>
 		     		  </li>	
 				    </ul>
+				    <div style="margin-top:-10px;margin-bottom:10px;" class="form-search text-center">
+			  		  <s:textfield key="searchPattern" cssClass="input-medium search-query" style="height:30px;" />
+				      <button type="button" class="btn" id="searchBtn">查询</button>
+				    </div>		  		  
 			      </div>
-			      <div class="span12"  style="margin-top:60px;">
+			      <div class="span12"  style="margin-top:80px;">
 				  <table class="table table-striped table-bordered">
 			  		<thead>
 			  			<tr>
@@ -111,6 +115,20 @@
 					$("#form").submit();
 				}
 			});
+			
+			$("#searchBtn").click(function(){
+				var text = $("#searchPattern").val().trim();
+				if ("" != text) {
+					var url = window.location.href;
+	    			var pattern = "?searchPattern=";
+	    			var index = url.indexOf(pattern);
+	    			if (index > 0) {
+	    				url = url.substring(0, index);
+	    			}
+	    			url += pattern + text;
+	    			window.location.href = url;
+				}
+			})
 			
 		})
 	</script>

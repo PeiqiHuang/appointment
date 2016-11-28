@@ -108,7 +108,9 @@ public class Page {
 		return "Page [everyPage=" + everyPage + ", totalCount=" + totalCount
 				+ ", totalPage=" + totalPage + ", currentPage=" + currentPage
 				+ ", beginIndex=" + beginIndex + ", hasPrePage=" + hasPrePage
-				+ ", hasNextPage=" + hasNextPage + "]";
+				+ ", hasNextPage=" + hasNextPage + ", objectList=" + objectList
+				+ "]";
 	}
+
 
 }

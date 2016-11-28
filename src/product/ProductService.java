@@ -24,4 +24,5 @@ public interface ProductService {
 	public List<Buy> getBuiesByProductIds(List<Integer> ids);
 	public Buyer createBuyerByProductIds(List<Integer> ids);
 	public Page queryByPage(int currentPage);
+	public Page search(String searchPattern);
 }

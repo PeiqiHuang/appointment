@@ -9,12 +9,12 @@
 	<bean id="dataSource"
 		class="org.apache.commons.dbcp.BasicDataSource">
 	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/appointment" />
+        <!-- <property name="url" value="jdbc:mysql://localhost:3306/appointment?useUnicode=true&amp;characterEncoding=UTF-8" />
         <property name="username" value="root" />
-        <property name="password" value="" />	
-        <!-- <property name="url" value="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_appointment" />
+        <property name="password" value="" />	 -->
+        <property name="url" value="jdbc:mysql://w.rdc.sae.sina.com.cn:3307/app_appointment" />
         <property name="username" value="3kjw2lxzoo" />
-        <property name="password" value="hh53wiyzx2l12jh404kyy05xmyxh4whjz3401mw0" /> -->
+        <property name="password" value="hh53wiyzx2l12jh404kyy05xmyxh4whjz3401mw0" />
         <property name="validationQuery" value="SELECT 1" />
     	<property name="testOnBorrow" value="true"/>
         <!-- 配置初始化大小、最小、最大 -->  
