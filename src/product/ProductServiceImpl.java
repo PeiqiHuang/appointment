@@ -182,4 +182,9 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.search(searchPattern);
 	}
 
+	@Override
+	public List<Buyer> getBuyersBySearch(String pattern) {
+		return buyerDAO.fuzzyFind(pattern);
+	}
+
 }

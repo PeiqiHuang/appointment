@@ -17,8 +17,17 @@ public class ProductAjaxAction extends ActionSupport {
 	
 	public String getBuyersByDate() {
 		List<Buyer> buyers = productService.getBuyersByDate(date);
-//		System.out.println("getBuyersByDate persons -> " + buyers);
-//		Gson gson = new GsonBuilder().setDateFormat("MM/dd").create();
+		setResultJson(buyers);
+		return SUCCESS;
+	}
+	
+	public String getBuyersBySearch() {
+		List<Buyer> buyers = productService.getBuyersBySearch(pattern);
+		setResultJson(buyers);
+		return SUCCESS;
+	}
+	
+	private void setResultJson(List<Buyer> buyers) {
 		final Map<String,Integer> countMap = new HashMap<String,Integer>();
 		countMap.put("buies", 0);
 		countMap.put("buyer", 0);
@@ -56,8 +65,6 @@ public class ProductAjaxAction extends ActionSupport {
             }  
         }).setDateFormat("MM/dd").create(); //
 		result = gson.toJson(buyers);
-//		System.out.println("json = " + result);
-		return SUCCESS;
 	}
 	
 	public String changeSelectPaid() {
@@ -103,6 +110,16 @@ public class ProductAjaxAction extends ActionSupport {
 		this.date = date;
 	}
 	
+	private String pattern;
+	
+	public String getPattern() {
+		return pattern;
+	}
+
+	public void setPattern(String pattern) {
+		this.pattern = pattern;
+	}
+
 	private List<Integer> ids;
 	
 	private Integer valid;

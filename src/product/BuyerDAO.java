@@ -122,11 +122,22 @@ public class BuyerDAO {
 		}
 	}
 	
-	public List findByPattern(String pattern) {
+	public List<Buyer> findByPattern(String pattern) {
 		try {
 			String queryString = "from Buyer as model where model.name=? or model.phone=? order by id desc";
 			Query queryObject = getCurrentSession().createQuery(queryString);
 			queryObject.setParameter(0, pattern).setParameter(1, pattern);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
+	
+	public List<Buyer> fuzzyFind(String pattern) {
+		try {
+			String queryString = "from Buyer as model where model.name like :pattern or model.phone like :pattern order by id desc";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+			queryObject.setString("pattern", "%"+pattern+"%");
 			return queryObject.list();
 		} catch (RuntimeException re) {
 			throw re;
@@ -224,7 +235,7 @@ public class BuyerDAO {
 			calendar.setTime(d1);
 			calendar.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH) + 1);
 			Date d2 = calendar.getTime();
-			String queryString = "from Buyer where date>=? and date <? order by id";
+			String queryString = "from Buyer where date>=? and date <? order by date desc";
 			Query queryObject = getCurrentSession().createQuery(queryString)
 					.setTimestamp(0, d1).setTimestamp(1, d2);
 			return queryObject.list();
@@ -255,4 +266,5 @@ public class BuyerDAO {
 //		Product product= new Product("p1", 1, 1);
 //		Buyer buyer= new Buyer("b3", "123", "address3", 10, 8, 18, new Date(), 1, 1, "");
 	}
+
 }

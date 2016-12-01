@@ -76,6 +76,11 @@
    				<!-- <param name="includeProperties">persons\[\d+\]\.id</param> -->
   			</result>
 		</action> 
+        <action name="getBuyersBySearch" method="getBuyersBySearch" class="product.ProductAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+  			</result>
+		</action> 
         <action name="changeSelectPaid" method="changeSelectPaid" class="product.ProductAjaxAction">
    			<result type="json">
    				<param name="root">result</param>

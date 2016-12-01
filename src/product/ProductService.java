@@ -12,6 +12,7 @@ public interface ProductService {
 	public List<Buyer> searchBuyer(String searchPattern);
 	public List<Buyer> getThisWeekBuyers();
 	public List<Buyer> getBuyersByDate(String date);
+	public List<Buyer> getBuyersBySearch(String pattern);
 	public Buyer findBuyerById(Integer buyerid);
 	public void deleteBuyer(Integer buyerid);
 	public void changeSelectStatus(List<Integer> ids, String string,

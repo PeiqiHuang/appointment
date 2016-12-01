@@ -24,8 +24,8 @@
 	<body style="margin:0px">
 		<div class="container">
 			<div class="row ">
-		  		<div class="span12" style="background-color:white;position:fixed;padding-bottom:20px;">
-	  			    <ul class="nav nav-tabs">
+		  		<div class="span12" style="background-color:white;position:fixed;padding-bottom:10px;border-bottom: 1px solid lightgray">
+	  			    <ul class="nav nav-tabs" style="margin-bottom: 10px;">
 				      <li>
 				        <a href='../../person/manage/show'>挂号管理</a>
 				      </li>
@@ -38,20 +38,28 @@
 				      <li>
 				        <a href='./all'>产品管理</a>
 				      </li>
+				      <li style="padding:2px;" class="pull-right">
+				        <s:textfield key="searchPattern" cssClass="input-medium search-query" style="height:25px;" placeholder="名字/电话" />
+				        <button type="button" class="btn" id="searchBtn">查询</button>
+				      </li>
+				      <li style="padding:2px 40px 2px;" class="pull-right">
+					      <button type="button" class="btn" id="prev">←</button>
+				  		  <s:textfield key="historyDate"  cssClass="input-medium search-query" style="height:25px;width:105px;" />
+					      <button type="button" class="btn" id="next">→</button>
+				      </li>
 				    </ul>
 		  		  <!-- 选择日期 -->
-				    <div class="form-search text-center">
-					      <button type="button" class="btn btn-large" id="prev">←</button>
-				  		  <s:textfield key="historyDate" style="height:40px;width:84px;" />
-					      <button type="button" class="btn btn-large" id="next">→</button>
+				    <div class="form-search">
 					      <!-- <button type="submit" class="btn" id="dateSubmit">查询</button> -->
+				      <span class="pull-left">
 					      <button class="btn btn-large" name="add" type="button"><s:text name="add"/></button>
 					      <button class="btn btn-large" name="paid" type="button" url="changeSelectPaid">支付</button>
 					      <button class="btn btn-large" name="sent" type="button" url="changeSelectSent">发货</button>
 					      <button class="btn btn-large" type="button" id="showAll">全部</button>
+				      </span>
 				      <span class="btn-group pull-right">
-					       	<button class="btn btn-large btn-success" id="sent1-count">0</span>
 					       	<button class="btn btn-large btn-info" id="sent2-count">0</span>
+					       	<button class="btn btn-large btn-success" id="sent1-count">0</span>
 					       	<button class="btn btn-large btn-warning" id="unsent-count">0</span>
 					       	<button class="btn btn-large btn-danger" id="unpaid-count">0</span>
 				      </span>
@@ -70,8 +78,8 @@
 			  				<th><a href="javascript:">运费</a></th>
 			  				<th><a href="javascript:">总共</a></th> -->
 			  				<th><a href="javascript:">价格</a></th>
-			  				<th><a href="javascript:">支付</a></th>
-			  				<th><a href="javascript:">发货</a></th>
+			  				<!-- <th><a href="javascript:">支付</a></th>
+			  				<th><a href="javascript:">发货</a></th> -->
 			  				<!-- <th><a href="javascript:">时间</a></th> -->
 			  				<th>操作</th>
 			  			</tr>
@@ -204,6 +212,11 @@
 				recoverTable();
 			})
 			
+			$("#searchBtn").click(function(){
+				var text = $("#searchPattern").val().trim();
+				updateTableBySearch(text);
+			})
+			
 			//-------------------------------function--------------------------------
 			function getSelected(){
 				var ids = [];
@@ -228,11 +241,23 @@
 				}
 			}
 			
+			function updateTableBySearch(text) {
+				if ("" != text) {
+					var url = "getBuyersBySearch";
+					var data = {"pattern" : text};
+					$.get(url, data, function(data){
+						var buyers = eval(data);
+						// console.info(buyers)
+						setTableData(buyers);
+					}, "json");
+				}
+			}
+			
 			function setTableData(buyers) {
 				$("#buyers").empty();
 				$.each(buyers, function(i){
 					var line = "<tr name='"+this.id+"' price='"+this.price+"' paid='"+this.paid+"' sent='"+this.sent+"'>";
-					line += "<td rowspan=1>"+(i+1)+"</td>";
+					line += "<td rowspan=1><p>"+(i+1)+"</p><p>"+this.date+"</p></td>";
 					
 					line += "<td rowspan=1>";
 					line += "<p>"+this.name+"</p><p>"+this.phone+"</p><p>"+this.address+"</p>";
@@ -255,9 +280,8 @@
 					line += "<td rowspan=1>";
 					line += "<p>"+this.price+"</p><p>"+this.freight+"</p><p><strong>"+this.tprice+"</strong></p>";
 					line += "</td>";
-					/* line += "<td rowspan=1>"+this.date+"</td>"; */
 					
-					var paid = "×";
+					/* var paid = "×";
 					if (this.paid > 0) {
 						paid="√";
 					}
@@ -268,7 +292,7 @@
 					} else if (this.sent == 2) {
 						sent="☆";
 					}
-					line += "<td rowspan=1>"+sent+"</td>";
+					line += "<td rowspan=1>"+sent+"</td>"; */
 					/* line += "<td rowspan=1>"+this.date+"</td>"; */
 					line += "<td><button  class='btn btn-block' name='update' value='"+this.id+"'>更新</button>"
 						+"<button  class='btn btn-block' name='del' value='"+this.id+"'><s:text name='del'/></button></td>";
