@@ -81,6 +81,11 @@
    				<param name="root">result</param>
   			</result>
 		</action> 
+        <action name="getUnsentBuyers" method="getUnsentBuyers" class="product.ProductAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+  			</result>
+		</action> 
         <action name="changeSelectPaid" method="changeSelectPaid" class="product.ProductAjaxAction">
    			<result type="json">
    				<param name="root">result</param>

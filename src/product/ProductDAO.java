@@ -57,7 +57,6 @@ public class ProductDAO {
 	}
 
 	public void save(Product transientInstance) {
-		System.out.println("save " + transientInstance);
 		log.debug("saving Product instance");
 		try {
 			getCurrentSession().saveOrUpdate(transientInstance);

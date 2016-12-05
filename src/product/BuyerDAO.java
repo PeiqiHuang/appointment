@@ -246,6 +246,12 @@ public class BuyerDAO {
 		}
 		return java.util.Collections.emptyList();
 	}
+	
+	public List<Buyer> getUnsentBuyers() {
+		String queryString = "from Buyer where paid > 0 and sent = 0 order by date desc";
+		Query queryObject = getCurrentSession().createQuery(queryString);
+		return queryObject.list();
+	}
 
 	public static BuyerDAO getFromApplicationContext(ApplicationContext ctx) {
 		return (BuyerDAO) ctx.getBean("buyerDAO");
@@ -255,7 +261,8 @@ public class BuyerDAO {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		 
 		BuyerDAO buyerDAO = (BuyerDAO) context.getBean("buyerDAO");
-		System.out.println(buyerDAO.findById(32).getBuies());
+//		System.out.println(buyerDAO.findById(32).getBuies());
+		System.out.println(buyerDAO.getUnsentBuyers());
 //		List<Buyer> list = buyerDAO.findByPattern("8893858");
 //		List<Buyer> list = buyerDAO.findByPattern("8893858");
 //		System.out.println(list);

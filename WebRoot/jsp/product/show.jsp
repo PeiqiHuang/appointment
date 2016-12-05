@@ -52,6 +52,7 @@
 				    <div class="form-search">
 					      <!-- <button type="submit" class="btn" id="dateSubmit">查询</button> -->
 				      <span class="pull-left">
+					      <button class="btn btn-large btn-warning" type="button" id="unsentBtn">未发货</button>
 					      <button class="btn btn-large" name="add" type="button"><s:text name="add"/></button>
 					      <button class="btn btn-large" name="paid" type="button" url="changeSelectPaid">支付</button>
 					      <button class="btn btn-large" name="sent" type="button" url="changeSelectSent">发货</button>
@@ -217,6 +218,10 @@
 				updateTableBySearch(text);
 			})
 			
+			$("#unsentBtn").click(function(){
+				updateTableByUnsent();
+			})
+			
 			//-------------------------------function--------------------------------
 			function getSelected(){
 				var ids = [];
@@ -251,6 +256,15 @@
 						setTableData(buyers);
 					}, "json");
 				}
+			}
+			
+			function updateTableByUnsent() {
+				var url = "getUnsentBuyers";
+				$.get(url, function(data){
+					var buyers = eval(data);
+					// console.info(buyers)
+					setTableData(buyers);
+				}, "json");
 			}
 			
 			function setTableData(buyers) {

@@ -27,6 +27,12 @@ public class ProductAjaxAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String getUnsentBuyers() {
+		List<Buyer> buyers = productService.getUnsentBuyers();
+		setResultJson(buyers);
+		return SUCCESS;
+	}
+	
 	private void setResultJson(List<Buyer> buyers) {
 		final Map<String,Integer> countMap = new HashMap<String,Integer>();
 		countMap.put("buies", 0);

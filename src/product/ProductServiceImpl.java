@@ -187,4 +187,9 @@ public class ProductServiceImpl implements ProductService {
 		return buyerDAO.fuzzyFind(pattern);
 	}
 
+	@Override
+	public List<Buyer> getUnsentBuyers() {
+		return buyerDAO.getUnsentBuyers();
+	}
+
 }
