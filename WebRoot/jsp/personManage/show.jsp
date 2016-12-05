@@ -139,6 +139,13 @@
 				window.open("../insert?addDate="+DATE, 'newwindow');
 				// window.location.href="../insert";
 			});
+			/* success */
+			$(document).on("click", "button[name='success']", function() {
+				
+				setForm(this);
+				$("#form").attr("action", "success");
+				$("#form").submit();
+			});
 			/* update */
 			$(document).on("click", "button[name='update']", function() {
 				
@@ -231,6 +238,7 @@
 					}
 					line += "<td>"+this.date+"</td>";
 					line += "<td>"+paid+"</td>"; */
+					line += "<td><button  class='btn btn-success btn-block' name='success' value='"+this.id+"'><s:text name='success'/></button></td>";
 					line += "<td><button  class='btn btn-block' name='update' value='"+this.id+"'><s:text name='update'/></button></td>";
 					line += "<td><button  class='btn btn-block' name='del' value='"+this.id+"''><s:text name='del'/></button></td>";
 					line += "<input type='hidden' name='gender' value='"+this.gender+"'/>";

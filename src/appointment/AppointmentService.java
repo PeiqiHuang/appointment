@@ -19,7 +19,9 @@ public interface AppointmentService {
 	
 	List<Time> showAllTime();
 	
-	List<Time> getAvailableTime(String id);
+	List<Time> getAvailableTime(String id, String addDate);
+	
+	List<Time> getAvailableTime();
 	
 	void savePerson(Person person);
 	
@@ -46,4 +48,6 @@ public interface AppointmentService {
 	List<Person> getPersonsByDate(String date);
 
 	BigInteger getMonthCount(String date);
+
+	void setSuccess(Person person);
 }

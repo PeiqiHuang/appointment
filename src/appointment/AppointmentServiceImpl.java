@@ -64,8 +64,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 	}
 
 	@Override
-	public List<Time> getAvailableTime(String id) {
+	public List<Time> getAvailableTime(String id, String addDate) {
 //		System.out.println("availableTime -> id -> " + id);
+//		System.out.println("availableTime -> addDate -> " + addDate);
 		List<Person> persons = personDAO.findToday();
 		List<Time> times = timeDAO.findAll();
 		List<Time> availableTime = timeDAO.findAll();
@@ -73,7 +74,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		 * if id is not null, it means is a update process
 		 * there is no need to filter
 		 */
-		if ("" == id || null == id) {
+		if (("" == id || null == id) && ("" == addDate || null == addDate)) {
 			for (Time time : times) {
 				int current = time.getCount();
 				if (current <= 0) {
@@ -95,6 +96,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return availableTime;
 	}
 	
+	@Override
+	public List<Time> getAvailableTime() {
+		return getAvailableTime("", "");
+	}
+	
 	/**
 	 * only time window is not full
 	 * and person is unique today
@@ -106,7 +112,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		if (null != person.getId()) {
 			return true;
 		}
-		List<Time> availableList = getAvailableTime("");
+		List<Time> availableList = getAvailableTime();
 		for (Time time : availableList) {
 			if (time.equals(person.getTime())) {
 				List<Person> todayPersonList = personDAO.findToday();
@@ -268,12 +274,20 @@ public class AppointmentServiceImpl implements AppointmentService {
 		 
 		AppointmentService appointmentService = (AppointmentService) context.getBean("appointmentService");
 		
-		System.out.println(appointmentService.getAvailableTime(""));
+		System.out.println(appointmentService.getAvailableTime());
 	}
 
 	@Override
 	public BigInteger getMonthCount(String date) {
 		return personDAO.getMonthCount(date);
+	}
+
+	@Override
+	public void setSuccess(Person person) {
+		if (null != person.getId()) {
+			personDAO.setSuccess(person.getId());
+		}
+		
 	}
 
 }

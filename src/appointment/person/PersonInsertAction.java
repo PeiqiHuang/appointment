@@ -32,6 +32,11 @@ public class PersonInsertAction extends ActionSupport implements ModelDriven<Per
 		return SUCCESS;
 	}
 	
+	public String success() {
+		appointmentService.setSuccess(person);
+		return SUCCESS;
+	}	
+	
 	private void updatePersonDate(String addDate) {
 //		System.out.println("updatePersonDate addDate = " + addDate);
 		if (null == addDate) {

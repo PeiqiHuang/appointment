@@ -60,6 +60,9 @@
         <action name="del" class="appointment.person.PersonDeleteAction">
    			<result type="redirectAction">show</result>
 		</action> 
+        <action name="success" method="success" class="appointment.person.PersonInsertAction">
+   			<result type="redirectAction">show</result>
+		</action>  	  
 		
 		<!-- ajax -->
         <action name="getPersonsByDate" method="getPersonsByDate" class="appointment.person.PersonAjaxAction">

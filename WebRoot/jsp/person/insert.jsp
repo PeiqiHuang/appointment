@@ -32,7 +32,7 @@
 	  		</ul>
 		  	<s:hidden name="id" />
 		  	<!-- appointmentService is on ValueStack, we can directly use its method and can put some param -->
-	  		<s:select label="可选时间段" name="time.id" list="appointmentService.getAvailableTime(id)" listKey="id" listValue="description" />
+	  		<s:select label="可选时间段" name="time.id" list="appointmentService.getAvailableTime(id, addDate)" listKey="id" listValue="description" />
 		  	<s:textfield key="name" />
 		  	<s:radio key="gender" list="#{false:'女',true:'男'}" />
 		  	<s:textfield key="age" />

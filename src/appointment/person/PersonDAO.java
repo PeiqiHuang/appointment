@@ -260,4 +260,9 @@ public class PersonDAO {
 //			System.out.println(user.getTime().getTime());
 //		}
 	}
+
+	public void setSuccess(Integer id) {
+		String sql = "update `person` set paid = 1 where id = " + id;
+		getCurrentSession().createSQLQuery(sql).executeUpdate();
+	}
 }
