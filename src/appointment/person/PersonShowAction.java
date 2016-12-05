@@ -1,18 +1,14 @@
 package appointment.person;
 
 
+import java.math.BigInteger;
 import java.util.List;
-import java.util.Map;
-
-import org.apache.struts2.ServletActionContext;
 
 import appointment.AppointmentService;
-import appointment.time.Time;
 import appointment.user.User;
 import appointment.user.UserAware;
 
 import com.opensymphony.xwork2.ActionSupport;
-import com.opensymphony.xwork2.ModelDriven;
 
 public class PersonShowAction extends ActionSupport implements UserAware {
 	
@@ -21,6 +17,7 @@ public class PersonShowAction extends ActionSupport implements UserAware {
 		// 修改逾期支付的病人的状态
 		appointmentService.updateStatus(list);
 		setPersons(list);
+		// setMonthCount(appointmentService.getMonthCount(date));
 		return SUCCESS;
 	}
 	
@@ -36,6 +33,7 @@ public class PersonShowAction extends ActionSupport implements UserAware {
 	
 	
 	private List<Person> persons;
+	private BigInteger monthCount;
 
 	public List<Person> getPersons() {
 		return persons;
@@ -43,6 +41,14 @@ public class PersonShowAction extends ActionSupport implements UserAware {
 
 	public void setPersons(List<Person> persons) {
 		this.persons = persons;
+	}
+
+	public BigInteger getMonthCount() {
+		return monthCount;
+	}
+
+	public void setMonthCount(BigInteger monthCount) {
+		this.monthCount = monthCount;
 	}
 
 	@Override

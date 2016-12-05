@@ -69,6 +69,11 @@
    				<!-- <param name="includeProperties">persons\[\d+\]\.id</param> -->
   			</result>
 		</action> 
+        <action name="getMonthCount" method="getMonthCount" class="appointment.person.PersonAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+  			</result>
+		</action> 
 		 	  
     </package>
 </struts>    

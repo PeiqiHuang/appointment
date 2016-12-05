@@ -1,6 +1,7 @@
 package appointment.person;
 
 
+import java.math.BigInteger;
 import java.util.List;
 
 import appointment.AppointmentService;
@@ -19,6 +20,11 @@ public class PersonAjaxAction extends ActionSupport {
 		Gson gson = new GsonBuilder().setDateFormat("HH:mm").create();
 		result = gson.toJson(persons);
 //		System.out.println("getPersonsByDate persons = " + result);
+		return SUCCESS;
+	}
+	
+	public String getMonthCount() {
+		result = appointmentService.getMonthCount(date).toString();
 		return SUCCESS;
 	}
 	

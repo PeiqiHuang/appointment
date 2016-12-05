@@ -38,8 +38,9 @@
 				    </ul>
 		  		  <!-- 选择日期 -->
 				    <div class="form-search text-center">
+				      <button type="button"  class="pull-left btn btn-large disabled">本月：<span id="monthCount"></span></button>
 				      <button type="button" class="btn btn-large" id="prev">←</button>
-			  		  <s:textfield key="historyDate" style="height:40px;width:84px;" />
+			  		  <s:textfield key="historyDate" style="height:40px;width:88px;" />
 				      <button type="button" class="btn btn-large" id="next">→</button>
 				      <button class="btn btn-large" name="add" type="button"><s:text name="add"/></button>
 			  		  <%-- <s:textfield key="historyDate" cssClass="input-medium search-query" onClick="WdatePicker({maxDate:'%y-%M-%d'})"/>
@@ -195,11 +196,15 @@
 			function updateTableByDate() {
 				if ("" != DATE) {
 					var url = "getPersonsByDate";
-					var data = {"date" : DATE};
-					$.get(url, data, function(data){
+					var postData = {"date" : DATE};
+					$.get(url, postData, function(data){
 						var persons = eval(data);
 						// console.info(persons)
 						setTableData(persons);
+						// 设置月度总数
+						$.get("getMonthCount", postData, function(data){
+							$("#monthCount").text(data + " / ¥" + (parseInt(data) * 20));
+						})
 					}, "json");
 				}
 			}

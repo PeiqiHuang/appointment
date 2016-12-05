@@ -1,6 +1,7 @@
 package appointment;
 
 import java.io.IOException;
+import java.math.BigInteger;
 import java.util.List;
 import java.util.Map;
 
@@ -43,4 +44,6 @@ public interface AppointmentService {
 	Person getTodayPerson(String phone);
 
 	List<Person> getPersonsByDate(String date);
+
+	BigInteger getMonthCount(String date);
 }

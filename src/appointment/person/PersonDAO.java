@@ -2,6 +2,7 @@ package appointment.person;
 
 import static org.hibernate.criterion.Example.create;
 
+import java.math.BigInteger;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -190,6 +191,11 @@ public class PersonDAO {
 		return java.util.Collections.emptyList();
 	}
 	
+	public BigInteger getMonthCount(String date) {
+		String sql = "select count(*) from `person` where date_format(date,'%Y-%m')=date_format(Date(\""+date+"\"), '%Y-%m') and paid>0"; // date_format(now(),'%Y-%m')
+		return (BigInteger) getCurrentSession().createSQLQuery(sql).uniqueResult();
+	}
+	
 	public Person merge(Person detachedInstance) {
 		log.debug("merging Person instance");
 		try {
@@ -234,7 +240,7 @@ public class PersonDAO {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		 
 		PersonDAO pDao = getFromApplicationContext(context);
-		
+		System.out.println(pDao.getMonthCount("2016-12-7"));
 //		System.out.println(pDao.getPersonsByDate("2016-11-7"));
 //		System.out.println(pDao.findToday());
 		

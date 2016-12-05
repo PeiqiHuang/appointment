@@ -6,7 +6,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Timestamp;
+import java.math.BigInteger;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -269,6 +269,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 		AppointmentService appointmentService = (AppointmentService) context.getBean("appointmentService");
 		
 		System.out.println(appointmentService.getAvailableTime(""));
+	}
+
+	@Override
+	public BigInteger getMonthCount(String date) {
+		return personDAO.getMonthCount(date);
 	}
 
 }
