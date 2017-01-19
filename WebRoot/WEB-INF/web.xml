@@ -32,4 +32,7 @@
     <param-name>contextConfigLocation</param-name>
     <param-value>WEB-INF/applicationContext.xml</param-value>
   </context-param>
+  <session-config>  
+	<session-timeout>1000</session-timeout>  
+  </session-config> 
 </web-app>

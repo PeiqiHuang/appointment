@@ -20,7 +20,7 @@ public class ProductAllAction extends ActionSupport implements UserAware{
 			page = productService.queryByPage(getCurrentPage());
 			
 		}
-		System.out.println(page);
+//		System.out.println(page);
 		return SUCCESS;
 	}
 	
@@ -43,6 +43,11 @@ public class ProductAllAction extends ActionSupport implements UserAware{
 	
 	public String del() {
 		productService.delProduct(productId);
+		return SUCCESS;
+	}
+	
+	public String copy() {
+		productService.copyBuyer(buyerid);
 		return SUCCESS;
 	}
 	
@@ -120,6 +125,16 @@ public class ProductAllAction extends ActionSupport implements UserAware{
 
 	public void setPage(Page page) {
 		this.page = page;
+	}
+	
+	private Integer buyerid;
+	
+	public Integer getBuyerid() {
+		return buyerid;
+	}
+
+	public void setBuyerid(Integer buyerid) {
+		this.buyerid = buyerid;
 	}
 
 	@Override

@@ -179,7 +179,7 @@ public class BuyDAO {
 //		}
 		for(Buy buy : buyerDAO.findById(31).getBuies()) {
 			System.out.println("Delete buy " + buy.getProduct().getName());
-			buyDao.delete(buy);
+//			buyDao.delete(buy);
 		}
 //		
 //		Product product= new Product("p2","p2", 1, 1);

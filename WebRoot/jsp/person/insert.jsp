@@ -27,7 +27,7 @@
 		  <s:form id="form" action="submit" theme="bootstrap" cssClass="well form-vertical" label="请输入您的预约信息"  style="max-width:600px;margin:0 auto;">
 		  	<ul>
 		  		<li>本次预约仅限<span class="text-error">明天</span>就诊</li>
-		  		<li>预约费<span class="text-error">¥20/位</span></li>
+		  		<li>预约费<span class="text-error">¥20/位</span>,预约支付成功后不能退号退款</li>
 		  		<li>如没有你想要的时间段请酌情选择其他可选时间段，或过段时间来看是否有没支付的号返还</li>
 	  		</ul>
 		  	<s:hidden name="id" />
@@ -40,6 +40,7 @@
 		  	<s:if test="id!=null"><s:select key="paid" list="#{-1:'过期', 0:'等待', 1:'成功'}"/></s:if>
 		  	<input type="hidden" value="<s:date format='yyyy-MM-dd HH:mm:ss' name='date' />" name='date' />
 		  	<s:hidden name="date" />
+		  	<s:hidden name="addDate" />
 		  	<a href="#" id="submit" class="btn btn-success btn-large btn-block">提交</a>
 		  	
 		  	<a href="searchForm" style="margin-top:10px;float:right">提交记录</a>

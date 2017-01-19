@@ -8,4 +8,5 @@
     <include file="appointment/user/user.xml"/>
     <include file="appointment/board/board.xml"/>
     <include file="product/product.xml"/>
+    <include file="express/express.xml"/>
 </struts>    

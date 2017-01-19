@@ -18,13 +18,23 @@
 			#buyers tr {
 				/* color:grey; */
 			}
+			.selected {
+				/* border : green dashed 2px; */
+				/* border-top: solid 3px green; */
+				/* background:#D8D8D8; */
+				color:red;
+			}
+			.primary {
+				background-color : 0099cc;
+				/* color : white; */
+			}
 	    </style>
 	</head>
 
 	<body style="margin:0px">
 		<div class="container">
 			<div class="row ">
-		  		<div class="span12" style="background-color:white;position:fixed;padding-bottom:10px;border-bottom: 1px solid lightgray">
+		  		<div class="span12" style="background-color:white;position:fixed;padding-bottom:10px;border-bottom: 1px solid lightgray;z-index: 99;">
 	  			    <ul class="nav nav-tabs" style="margin-bottom: 10px;">
 				      <li>
 				        <a href='../../person/manage/show'>挂号管理</a>
@@ -39,6 +49,18 @@
 				        <a href='./all'>产品管理</a>
 				      </li>
 				      <li style="padding:2px;" class="pull-right">
+				        <button type="button" class="btn" onclick="window.open('../../express/list')">快递单</button>
+				      </li>
+				      <li style="padding:2px;" class="pull-right">
+					      <span class="btn-group">
+						       	<button class="btn btn-info" id="sent2-count" title="私人发">0</button>
+						       	<button class="btn btn-primary" id="sent3-count" title="诊所发私">0</button>
+						       	<button class="btn btn-success" id="sent1-count" title="诊所发公">0</button>
+						       	<button class="btn btn-warning" id="unsent-count" title="未发货">0</button>
+						       	<button class="btn btn-danger" id="unpaid-count" title="未付款">0</button>
+					      </span>
+				      </li>
+				      <%-- <li style="padding:2px;" class="pull-right">
 				        <s:textfield key="searchPattern" cssClass="input-medium search-query" style="height:25px;" placeholder="名字/电话" />
 				        <button type="button" class="btn" id="searchBtn">查询</button>
 				      </li>
@@ -46,24 +68,35 @@
 					      <button type="button" class="btn" id="prev">←</button>
 				  		  <s:textfield key="historyDate"  cssClass="input-medium search-query" style="height:25px;width:105px;" />
 					      <button type="button" class="btn" id="next">→</button>
-				      </li>
+				      </li> --%>
 				    </ul>
 		  		  <!-- 选择日期 -->
 				    <div class="form-search">
 					      <!-- <button type="submit" class="btn" id="dateSubmit">查询</button> -->
 				      <span class="pull-left">
-					      <button class="btn btn-large btn-warning" type="button" id="unsentBtn">未发货</button>
-					      <button class="btn btn-large" name="add" type="button"><s:text name="add"/></button>
-					      <button class="btn btn-large" name="paid" type="button" url="changeSelectPaid">支付</button>
-					      <button class="btn btn-large" name="sent" type="button" url="changeSelectSent">发货</button>
-					      <button class="btn btn-large" type="button" id="showAll">全部</button>
+					      <button class="btn btn-warning" type="button" id="unsentBtn">未发货</button>
+					      <button class="btn" name="add" type="button"><s:text name="add"/></button>
+					      <button class="btn" name="paid" type="button" url="changeSelectPaid">支付</button>
+					      <button class="btn" name="sent" type="button" url="changeSelectSent">发货</button>
+					      <button class="btn" type="button" id="showAll">全部</button>
+					      <button class="btn" type="button" id="selected_price" disabled>0</button>
 				      </span>
-				      <span class="btn-group pull-right">
-					       	<button class="btn btn-large btn-info" id="sent2-count">0</span>
-					       	<button class="btn btn-large btn-success" id="sent1-count">0</span>
-					       	<button class="btn btn-large btn-warning" id="unsent-count">0</span>
-					       	<button class="btn btn-large btn-danger" id="unpaid-count">0</span>
+				      <span class="pull-right" style="margin-left:20px;">
+					      <s:textfield key="searchPattern" cssClass="input-medium search-query" style="height:25px;" placeholder="名字/电话" />
+				          <button type="button" class="btn" id="searchBtn">查询</button>
 				      </span>
+				      <span class="pull-right">
+						  <button type="button" class="btn" id="prev">←</button>
+				  		  <s:textfield key="historyDate"  cssClass="input-medium search-query" style="height:25px;width:105px;" />
+					      <button type="button" class="btn" id="next">→</button>				      
+				      </span>
+				      <%-- <span class="btn-group pull-right">
+					       	<button class="btn btn-info" id="sent2-count" title="私人发">0</button>
+					       	<button class="btn btn-primary" id="sent3-count" title="诊所发私">0</button>
+					       	<button class="btn btn-success" id="sent1-count" title="诊所发公">0</button>
+					       	<button class="btn btn-warning" id="unsent-count" title="未发货">0</button>
+					       	<button class="btn btn-danger" id="unpaid-count" title="未付款">0</button>
+				      </span> --%>
 				    </div>		
 				  </div>		
 				  <div class="span12" style="margin-top:110px;">    		  
@@ -131,6 +164,12 @@
 				$("#form").attr("action", "../buy");
 				$("#form").submit();
 			});
+			/* copy */
+			$(document).on("click", "button[name='copy']", function() {
+				$("#form_buyerid").val($(this).val());
+				$("#form").attr("action", "copy");
+				$("#form").submit();
+			});
 			/* delete */
 			$(document).on("click", "button[name='del']", function() {
 				var con = confirm("确定删除?");
@@ -139,6 +178,9 @@
 					$("#form").attr("action", "del");
 					$("#form").submit();
 				}
+			});
+			$(document).on("click", "button[name='show']", function() {
+				window.open("../searchResult?searchPattern=" + $(this).val());
 			});
 			
 			/* ajax 切换日期 */
@@ -150,12 +192,17 @@
 			// 多选
 			$(document).on("click", "#buyers tr", function(){
 				var $td = $(this).children().first();
+				var price = parseInt($(this).attr("price"));
 				if ($td.attr("select") != "true") {
 					$td.attr("select", "true");
-					$(this).css("color", "red");
+					//$(this).css("color", "red");
+					$(this).addClass("selected");
+					addSelectedPrice(price);
 				} else {
 					$td.attr("select", "false");
-					$(this)	.css("color", "black");
+					// $(this).css("color", "black");
+					$(this).removeClass("selected");
+					addSelectedPrice(-price);
 				}
 			})
 			
@@ -189,6 +236,9 @@
 				var valid = confirm("修改方向？") ? 1 : 0;
 				if (name == "sent" && valid > 0) {
 					valid = confirm("诊所发？") ? 1 : 2;
+					if (valid == 1) {
+						valid = confirm("落公？") ? 1 : 3;
+					}
 				}
 				var data = $.param({"ids" : getSelected(), "valid" : valid}, true);
 				$.post(url, data, function(info){
@@ -202,6 +252,9 @@
 			})
 			$("#sent2-count").click(function(){
 				filterTable("info");
+			})
+			$("#sent3-count").click(function(){
+				filterTable("primary");
 			})
 			$("#unsent-count").click(function(){
 				filterTable("warning");
@@ -271,9 +324,10 @@
 				$("#buyers").empty();
 				$.each(buyers, function(i){
 					var line = "<tr name='"+this.id+"' price='"+this.price+"' paid='"+this.paid+"' sent='"+this.sent+"'>";
-					line += "<td rowspan=1><p>"+(i+1)+"</p><p>"+this.date+"</p></td>";
+					line += "<td rowspan=1><p>"+(i+1)+"</p><p>"+this.id+"</p><p>"+this.date+"</p></td>";
 					
 					line += "<td rowspan=1>";
+					// var href_phone = "<a href='../searchResult?searchPattern="+this.phone+"'>"+this.phone+"</a>";
 					line += "<p>"+this.name+"</p><p>"+this.phone+"</p><p>"+this.address+"</p>";
 					if(this.remark!= "")
 						line += "<p><small style='color:red'>( 备注: "+this.remark+" )</small><p/>";
@@ -308,8 +362,12 @@
 					}
 					line += "<td rowspan=1>"+sent+"</td>"; */
 					/* line += "<td rowspan=1>"+this.date+"</td>"; */
-					line += "<td><button  class='btn btn-block' name='update' value='"+this.id+"'>更新</button>"
-						+"<button  class='btn btn-block' name='del' value='"+this.id+"'><s:text name='del'/></button></td>";
+					line += "<td><div class='btn-group btn-group-vertical'>"
+						+"<button  class='btn' name='update' value='"+this.id+"'>更新</button>"
+						+"<button  class='btn' name='del' value='"+this.id+"'><s:text name='del'/></button>"
+						+"<button  class='btn' name='show' value='id"+this.id+"'>展示</button>"
+						+"<button  class='btn' name='copy' value='"+this.id+"'>复制</button>"
+						+"</div></td>";
 					line += "</tr>";
 					/* line += "<tr><td><button  class='btn btn-block' name='update' value='"+this.id+"'>产品</button></td></tr>"; */
 					/* line += "<tr><td><button  class='btn btn-block' name='del' value='"+this.id+"''><s:text name='del'/></button></td></tr>"; */
@@ -336,10 +394,12 @@
 				var unsent = 0;
 				var sent1 = 0;
 				var sent2 = 0;
+				var sent3 = 0;
 				var unpaid_price = 0;
 				var unsent_price = 0;
 				var sent1_price = 0;
 				var sent2_price = 0;
+				var sent3_price = 0;
 				$("#buyers").children().each(function(){
 					/* $(this).attr("class", "success"); */
 					var price = parseInt($(this).attr("price"));
@@ -364,11 +424,17 @@
 						sent2++;
 						sent2_price += price;
 						$(this).attr("class", "info");
+					} else if (sent == 3){
+						sent3++;
+						sent3_price += price;
+						$(this).attr("class", "primary");
+						//$(this).css("background-color", "rgb(0,85,204)");
 					}
 				})
 				//console.info($("#buyers").children().length + " " + unpaid + " " + unsent)
 				$("#sent1-count").text(sent1 + " / ¥" + sent1_price);
 				$("#sent2-count").text(sent2 + " / ¥" + sent2_price);
+				$("#sent3-count").text(sent3 + " / ¥" + sent3_price);
 				$("#unpaid-count").text(unpaid + " / ¥" + unpaid_price);
 				$("#unsent-count").text(unsent + " / ¥" + unsent_price);
 			}
@@ -387,6 +453,11 @@
 				$("#buyers").children().each(function(){
 					$(this).css("display", "");
 				})
+			}
+			
+			function addSelectedPrice(price) {
+				var selected = parseInt($("#selected_price").text());
+				$("#selected_price").text(selected + price);
 			}
 			
 		})

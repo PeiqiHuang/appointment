@@ -54,6 +54,9 @@
         <action name="del" class="product.ProductDeleteAction">
    			<result type="redirectAction">order</result>
 		</action> 
+        <action name="copy" method="copy" class="product.ProductAllAction">
+   			<result>/jsp/product/show.jsp</result>
+		</action> 
 		
         <action name="all" class="product.ProductAllAction">
    			<result>/jsp/product/all.jsp</result>

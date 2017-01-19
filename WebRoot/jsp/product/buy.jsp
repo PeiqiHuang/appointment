@@ -4,7 +4,7 @@
 <html>
 
 	<head>
-    	<title>请选择产品</title>
+    	<title>请确认产品和数量</title>
     	<script src="../js/jquery.min.js"></script>
     	<script src="../js/localstorage.js"></script>
     	<sb:head/>
@@ -36,7 +36,7 @@
 	<body>
 		<s:form id="form" action="submit" theme="bootstrap" cssClass="well form-vertical" label="购买清单"  style="max-width:600px;margin:0 auto;">
 			
-			<s:if test="ids==null">
+			<s:if test="ids==null && productValid==0">
     			<s:select label="请选择产品" id="products" list="products" listKey="id" listValue="%{alias+' ¥'+price}" emptyOption="true"/>
 				<%-- <s:if test="buyerid!=null && buyerid!='' || productValid==0">
 	    			<s:select label="请选择产品(可多次选择)" id="products" list="products" listKey="id" listValue="%{alias+' ¥'+price}" emptyOption="true"/>
@@ -92,7 +92,7 @@
    			<s:if test="buyerid!=null && buyerid!=''  || productValid==0">
    				<s:textfield label="邮费" key="buyer.freight" />
    				<s:select label="支付" id="paidSelect" name="buyer.paid" list="#{0:'否', 1:'是'}"/>
-   				<s:select label="发货" id="sentSelect" name="buyer.sent" list="#{0:'未发货', 1:'诊所发', 2:'私人发'}"/>
+   				<s:select label="发货" id="sentSelect" name="buyer.sent" list="#{0:'未发货', 1:'诊所发公', 2:'私人发', 3:'诊所发私'}"/>
    			</s:if>
    			<s:else>
 	    		<s:select label="请选择邮寄地址" id="addSelect" list="#{1:'东莞市内', 2:'广东省内', 3:'广东省外'}"/>
@@ -111,8 +111,8 @@
     		<s:textfield key="buyer.name" label="收件人" />
     		<s:textfield key="buyer.phone"  label="联系电话" />
     		<s:textfield key="buyer.address" label="详细地址" />
+    		<s:textfield key="buyer.remark" label="备注" />
     		<s:if test="buyerid!=null && buyerid!=''  || productValid==0">
-	    		<s:textfield key="buyer.remark" label="备注" />
     			<button type="button" id="go" class="btn btn-block btn-large btn-success">确认订单</button>
     		</s:if>
 		</s:form>	
@@ -197,8 +197,10 @@
 			
 			$("#go").click(function(){
 				if ($("#items").children().length < 1) {
-					alert("请至少购买一样产品");
-					return;
+					if ("" == $("#form_buyer_remark").val()) {
+						alert("请至少购买一样产品或在备注中填上你想要的产品");
+						return;
+					}
 				}
 				if ($("#form_buyer_name").val().trim() == "") {
 					alert("请填上邮寄姓名");

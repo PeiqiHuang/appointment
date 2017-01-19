@@ -1,6 +1,8 @@
 package product;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -190,6 +192,31 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Buyer> getUnsentBuyers() {
 		return buyerDAO.getUnsentBuyers();
+	}
+
+	@Override
+	public void copyBuyer(Integer buyerid) {
+		Buyer b = findBuyerById(buyerid);
+		Set<Buy> bs = b.getBuies();
+		
+		Buyer buyer = new Buyer();
+		buyer.setPaid(0);
+		buyer.setSent(0);
+		buyer.setDate(new Date());
+		buyer.setName(b.getName());
+		buyer.setPhone(b.getPhone());
+		buyer.setAddress(b.getAddress());
+		buyer.setPrice(b.getPrice());
+		buyer.setFreight(b.getFreight());
+		buyer.setTprice(b.getTprice());
+		buyer.setRemark(b.getRemark());
+		
+		List buies = new ArrayList<Buy>();
+		for(Buy buy : bs) {
+			buies.add(new Buy(buy.getProduct(), buy.getNumber()));
+		}
+		
+		saveOrder(buies, buyer);
 	}
 
 }

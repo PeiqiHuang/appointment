@@ -59,21 +59,13 @@
 			<div class="span12">
 				<div class="page-header">
 		            <h3 class="text-center">护理产品目录</h3>
-		            <!-- <div id="buy" class="text-right" style="text-decoration:underline">购买方法</div> -->
 		        </div>
-	            <!-- <div class="media well" style="display:none" id="tip">
-			      <div class="pull-left">
-			        <img class="media-object" width="100px" src="../img/erweima.jpg">
-			      </div>
+	            <div class="media well" style="margin-top:-20px;">
 			      <div class="media-body">
-			        <h4 class="media-heading">购买方法</h4>
-			        	<ol>
-			        		<li>长按左方二维码</li>
-			        		<li>点击"识别图中二维码"</li>
-			        		<li>加工作人员微信咨询购买</li>
-			        	</ol>
+		            <h5 class="text-center" style="text-decoration:underline;">提示</h5>
+					<p>如下方没有你想要的产品，可直接点击下单，在备注中写下你要的产品，加付款微信后确认。</p>
 			      </div>
-			    </div> -->
+			    </div>
 		        		
 				<!-- Modal -->
 			    <div class="modal-div" id="modal">
@@ -180,15 +172,16 @@
 				var SELECTED_ITEMS = getLocal();
 				// console.info(SELECTED_ITEMS)
 				if (SELECTED_ITEMS.length < 1) {
-					alert("购物车空空如也~");
-					return;
+					//alert("购物车空空如也~");
+					//return;
+				} else {
+					/* var data = $.param({"ids" : SELECTED_ITEMS}, true);
+					$.post("./buy", data, function); */
+					$.each(SELECTED_ITEMS, function(i){
+						var node = "<input type=hidden name=ids["+i+"] value="+this+" />";
+						$("#form").append(node);
+					})
 				}
-				/* var data = $.param({"ids" : SELECTED_ITEMS}, true);
-				$.post("./buy", data, function); */
-				$.each(SELECTED_ITEMS, function(i){
-					var node = "<input type=hidden name=ids["+i+"] value="+this+" />";
-					$("#form").append(node);
-				})
 				$("#form").submit();
 			})
 			

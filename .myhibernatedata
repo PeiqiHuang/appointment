@@ -1,14 +1,14 @@
 #MyEclipse Hibernate Properties
-#Wed Nov 09 09:33:23 CST 2016
+#Tue Jan 17 11:02:46 CST 2017
 genBasicCompId=true
 sessionFactoryName=
 profile=
-daoSFId=sessionFactory
+daoSFId=
 jndiPath=
-detectM2M=true
+detectM2M=false
 reStrategyClass=
 detectO2O=false
-springDaoFile=WebRoot/WEB-INF/applicationContext.xml
+springDaoFile=
 useJavaTypes=true
 keyGenerator=native
 genVersionTag=false

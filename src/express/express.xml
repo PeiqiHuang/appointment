@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+    <package name="express" namespace="/express" extends="struts-default">
+    	<!-- ajax json result -->
+		<result-types>
+            <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+        </result-types>
+        
+        <action name="list" method="list" class="express.ExpressAction">
+   			<result>/jsp/express/list.jsp</result>
+		</action>  	  
+        <action name="listAjax" method="listAjax" class="express.ExpressAction">
+   			<result type="json">
+   				<param name="root">list</param>
+  			</result>
+		</action> 
+        <action name="searchAjax" method="searchAjax" class="express.ExpressAction">
+   			<result type="json">
+   				<param name="root">list</param>
+  			</result>
+		</action> 
+        <action name="trackQuery" method="trackQuery" class="express.ExpressAction">
+   			<result type="json">
+   				<param name="root">result</param>
+  			</result>
+		</action> 
+        <action name="commit" method="commit" class="express.ExpressAction">
+   			<result type="json">
+   				<param name="root">msg</param>
+  			</result>
+		</action> 
+    </package>
+    
+</struts>    

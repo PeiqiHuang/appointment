@@ -47,10 +47,20 @@ public class PersonSubmitAction extends ActionSupport implements ModelDriven<Per
 		return person;
 	}
 	
+	private String addDate;
+	
+	public String getAddDate() {
+		return addDate;
+	}
+
+	public void setAddDate(String addDate) {
+		this.addDate = addDate;
+	}
+
 	@Override
 	public void validate() {
-//		System.out.println("person submit validate person = " + person);
-		if (!appointmentService.isInsertValid(person)) {
+//		System.out.println("person submit validate addDate = " + addDate);
+		if ((addDate == null || "".equals(addDate)) && !appointmentService.isInsertValid(person)) {
 //			System.out.println("validate isInsertValid false");
 			addFieldError( "time.id", getText("person.insert.invalid") );
 		}

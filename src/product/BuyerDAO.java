@@ -124,10 +124,18 @@ public class BuyerDAO {
 	
 	public List<Buyer> findByPattern(String pattern) {
 		try {
-			String queryString = "from Buyer as model where model.name=? or model.phone=? order by id desc";
-			Query queryObject = getCurrentSession().createQuery(queryString);
-			queryObject.setParameter(0, pattern).setParameter(1, pattern);
-			return queryObject.list();
+			if (pattern.startsWith("id")) {
+				String queryString = "from Buyer as model where model.id=?";
+				pattern = pattern.replace("id", "");
+				Query queryObject = getCurrentSession().createQuery(queryString);
+				queryObject.setParameter(0, Integer.parseInt(pattern));
+				return queryObject.list();
+			} else {
+				String queryString = "from Buyer as model where model.name=? or model.phone=? order by id desc";
+				Query queryObject = getCurrentSession().createQuery(queryString);
+				queryObject.setParameter(0, pattern).setParameter(1, pattern);
+				return queryObject.list();
+			}
 		} catch (RuntimeException re) {
 			throw re;
 		}

@@ -27,4 +27,5 @@ public interface ProductService {
 	public Page queryByPage(int currentPage);
 	public Page search(String searchPattern);
 	public List<Buyer> getUnsentBuyers();
+	public void copyBuyer(Integer buyerid);
 }
