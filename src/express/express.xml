@@ -30,6 +30,13 @@
    				<param name="root">msg</param>
   			</result>
 		</action> 
+        <action name="searchForm" method="searchForm" class="express.ExpressAction">
+   			<result>/jsp/express/search.jsp</result>
+		</action>  	  
+        <action name="display" method="display" class="express.ExpressAction">
+   			<result name="success">/jsp/express/display.jsp</result>
+   			<result name="search">/jsp/express/search.jsp</result>
+		</action>  	  
     </package>
     
 </struts>    

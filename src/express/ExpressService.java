@@ -14,4 +14,5 @@ public interface ExpressService {
 	String trackQuery(Integer pattern) throws Exception;
 	Express findByNameAndPhone(String name, String phone);
 	List<Map<String, String>> getTrackList(Express express) throws Exception;
+	Express searchOne(String pattern);
 }

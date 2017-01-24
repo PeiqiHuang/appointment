@@ -231,4 +231,19 @@ public class ExpressDAO {
 			throw re;
 		}
 	}
+	
+	public Express searchOne(String pattern) {
+		try {
+			String queryString = "from Express where name = :name or phone = :phone order by date desc";
+			Query queryObject = getCurrentSession().createQuery(queryString);
+			queryObject.setString("name", pattern);
+			queryObject.setString("phone", pattern);
+			List<Express> list = queryObject.list();
+			if (list.isEmpty()) return null;
+			return list.get(0);
+		} catch (RuntimeException re) {
+			log.error("find all failed", re);
+			throw re;
+		}
+	}
 }

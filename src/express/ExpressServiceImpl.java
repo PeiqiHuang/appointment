@@ -126,4 +126,9 @@ public class ExpressServiceImpl implements ExpressService {
 		return trackList;
 	}
 
+	@Override
+	public Express searchOne(String pattern) {
+		return expressDAO.searchOne(pattern);
+	}
+
 }

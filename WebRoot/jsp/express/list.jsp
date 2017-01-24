@@ -30,7 +30,7 @@
 				<th data-options="field:'id',width:30">序号</th>
 				<th data-options="field:'name',width:50,editor:'textbox'">名字</th>
 				<th data-options="field:'phone',width:75,editor:'numberbox'">电话</th>
-				<th data-options="field:'number',width:90,editor:'numberbox'">单号</th>
+				<th data-options="field:'number',width:90,editor:'textbox'">单号</th>
 				<th data-options="field:'company',width:50,editor:{'type':'combobox', options:{editable:false,  
 						data:  
 						[  

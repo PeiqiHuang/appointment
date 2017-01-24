@@ -8,10 +8,6 @@ import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 
-import util.KdniaoTrackQueryAPI;
-
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ExpressAction extends ActionSupport {
@@ -28,6 +24,21 @@ public class ExpressAction extends ActionSupport {
 	public String searchAjax() {
 		list = expressService.search(pattern);
 		return SUCCESS;
+	}
+	
+	public String searchForm() {
+		return SUCCESS;
+	}
+	
+	public String display() throws Exception {
+		express = expressService.searchOne(pattern);
+		if (express != null) {
+			trackList = expressService.getTrackList(express);
+			return SUCCESS;
+		} else {
+			pattern = "查询不到该记录，可能快递还没揽件或输入有误";
+			return "search";
+		}
 	}
 	
 	public String commit() {
@@ -52,6 +63,16 @@ public class ExpressAction extends ActionSupport {
 	private Map<String, Object> msg = new HashMap<String, Object>();
 	private String result;
 	private Integer id;
+	private Express express;
+	private List<Map<String, String>> trackList = new ArrayList<Map<String,String>>();
+
+	public List<Map<String, String>> getTrackList() {
+		return trackList;
+	}
+
+	public void setTrackList(List<Map<String, String>> trackList) {
+		this.trackList = trackList;
+	}
 	
 	public ExpressService getExpressService() {
 		return expressService;
@@ -124,6 +145,14 @@ public class ExpressAction extends ActionSupport {
 
 	public void setId(Integer id) {
 		this.id = id;
+	}
+
+	public Express getExpress() {
+		return express;
+	}
+
+	public void setExpress(Express express) {
+		this.express = express;
 	}
 	
 }

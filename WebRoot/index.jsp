@@ -3,7 +3,7 @@
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <html>
 	<head>
-	    <title>谢永年卫生所</title>
+	    <title>东莞东坑谢永年卫生所</title>
 	    <sb:head/>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>

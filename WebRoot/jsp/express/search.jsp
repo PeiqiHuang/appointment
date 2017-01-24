@@ -3,7 +3,7 @@
 <%@ taglib prefix="sb" uri="/struts-bootstrap-tags" %>
 <html>
 	<head>
-	    <title>查询订单</title>
+	    <title>东莞东坑谢永年卫生所</title>
 	    <sb:head/>
 	    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	</head>
@@ -23,8 +23,8 @@
         <s:actionmessage theme="bootstrap"/>
         <s:fielderror theme="bootstrap"/>
         
-		  <s:form id="form" action="searchResult" theme="bootstrap" cssClass="well form-vertical" label="查询订单">
-		  	<s:textfield key="searchPattern"  label="请输入订单姓名 / 电话查询" />
+		  <s:form id="form" action="display" theme="bootstrap" cssClass="well form-vertical" label="物流查询">
+		  	<s:textfield key="pattern"  label="请输入姓名 /电话" />
 		  	<s:submit value="查询" key="submit" cssClass="btn btn-success btn-block" />
 		  </s:form>
 	</body>
