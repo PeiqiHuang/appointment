@@ -81,7 +81,7 @@
 	  	<s:hidden name="productId" />
 	  </s:form>
 	  
-	  <jsp:include page="/jsp/util/page.jsp"/>
+	  <jsp:include page="../util/page.jsp"/>
 	</body>
 	
 	<script src="../../js/jquery.min.js"></script>

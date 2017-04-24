@@ -22,15 +22,15 @@
 		</global-results>
 		
         <action name="insert" method="insert"  class="appointment.time.TimeAction">
-   			<result>/jsp/time/insert.jsp</result>
+   			<result>/WEB-INF/jsp/time/insert.jsp</result>
 		</action>  	  
         <action name="submit" method="submit" class="appointment.time.TimeAction">
-   			<result name="input">/jsp/time/insert.jsp</result>
+   			<result name="input">/WEB-INF/jsp/time/insert.jsp</result>
    			<result name="success" type="redirectAction">show</result>
 		</action>  	  
         <action name="show" method="show" class="appointment.time.TimeAction">
-   			<result name="input">/jsp/time/insert.jsp</result>
-   			<result name="success">/jsp/time/show.jsp</result>
+   			<result name="input">/WEB-INF/jsp/time/insert.jsp</result>
+   			<result name="success">/WEB-INF/jsp/time/show.jsp</result>
 		</action>  	  
         <action name="del" method="del" class="appointment.time.TimeAction">
    			<result type="redirectAction">show</result>

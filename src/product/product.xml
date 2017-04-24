@@ -3,24 +3,24 @@
 <struts>
     <package name="product" namespace="/product" extends="struts-default">
         <action name="buy" method="buy" class="product.ProductAction">
-   			<result>/jsp/product/buy.jsp</result>
+   			<result>/WEB-INF/jsp/product/buy.jsp</result>
 		</action>  	  
         <action name="submit" method="submit" class="product.ProductSubmitAction">
    			<result name="update" type="redirectAction">
    				<param name="namespace">/product/manage</param>
 				<param name="actionName">order</param>
    			</result>
-   			<result name="success">/jsp/product/buyinfo.jsp</result>
+   			<result name="success">/WEB-INF/jsp/product/buyinfo.jsp</result>
 		</action>  	  
         <action name="search">
-   			<result>/jsp/product/search.jsp</result>
+   			<result>/WEB-INF/jsp/product/search.jsp</result>
 		</action>  	  
         <action name="searchResult" method="searchResult" class="product.ProductSearchAction">
-   			<result name="success">/jsp/product/buyinfo.jsp</result>
-   			<result name="search">/jsp/product/search.jsp</result>
+   			<result name="success">/WEB-INF/jsp/product/buyinfo.jsp</result>
+   			<result name="search">/WEB-INF/jsp/product/search.jsp</result>
 		</action>  	  
         <action name="list" method="list" class="product.ProductAction">
-   			<result>/jsp/product/list.jsp</result>
+   			<result>/WEB-INF/jsp/product/list.jsp</result>
 		</action>  	  
     </package>
     
@@ -49,20 +49,20 @@
 		</global-results>
 		
         <action name="order" class="product.ProductShowAction">
-   			<result>/jsp/product/show.jsp</result>
+   			<result>/WEB-INF/jsp/product/show.jsp</result>
 		</action>  	  
         <action name="del" class="product.ProductDeleteAction">
    			<result type="redirectAction">order</result>
 		</action> 
         <action name="copy" method="copy" class="product.ProductAllAction">
-   			<result>/jsp/product/show.jsp</result>
+   			<result>/WEB-INF/jsp/product/show.jsp</result>
 		</action> 
 		
         <action name="all" class="product.ProductAllAction">
-   			<result>/jsp/product/all.jsp</result>
+   			<result>/WEB-INF/jsp/product/all.jsp</result>
 		</action> 
         <action name="insert" method="insert" class="product.ProductAllAction">
-   			<result>/jsp/product/insert.jsp</result>
+   			<result>/WEB-INF/jsp/product/insert.jsp</result>
 		</action> 
         <action name="submit" method="submit" class="product.ProductAllAction">
    			<result name="success" type="redirectAction">all</result>
@@ -77,6 +77,11 @@
    				<param name="root">result</param>
    				<!-- <param name="excludeProperties">person.time</param> -->
    				<!-- <param name="includeProperties">persons\[\d+\]\.id</param> -->
+  			</result>
+		</action> 
+		<action name="getMonthCount" method="getMonthCount" class="product.ProductAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
   			</result>
 		</action> 
         <action name="getBuyersBySearch" method="getBuyersBySearch" class="product.ProductAjaxAction">

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import util.Page;
@@ -217,6 +218,11 @@ public class ProductServiceImpl implements ProductService {
 		}
 		
 		saveOrder(buies, buyer);
+	}
+
+	@Override
+	public List<Map<String, String>> getMonthCount(String date) {
+		return buyerDAO.getMonthCount(date);
 	}
 
 }

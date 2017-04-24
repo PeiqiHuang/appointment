@@ -1,6 +1,7 @@
 package product;
 
 import java.util.List;
+import java.util.Map;
 
 import util.Page;
 
@@ -28,4 +29,6 @@ public interface ProductService {
 	public Page search(String searchPattern);
 	public List<Buyer> getUnsentBuyers();
 	public void copyBuyer(Integer buyerid);
+	public List<Map<String, String>> getMonthCount(String date);
+	
 }

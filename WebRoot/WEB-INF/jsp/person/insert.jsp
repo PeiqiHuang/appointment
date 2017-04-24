@@ -26,9 +26,9 @@
 		<s:if test='null==board || ""==board || id!=null || addDate!=null'>	        
 		  <s:form id="form" action="submit" theme="bootstrap" cssClass="well form-vertical" label="请输入您的预约信息"  style="max-width:600px;margin:0 auto;">
 		  	<ul>
-		  		<li>本次预约仅限<span class="text-error">明天</span>就诊</li>
-		  		<li>预约费<span class="text-error">¥20/位</span>,预约支付成功后不能退号退款</li>
-		  		<li>如没有你想要的时间段请酌情选择其他可选时间段，或过段时间来看是否有没支付的号返还</li>
+		  		<li><strong>由于不能确认每天门诊现场的人数，所以可能出现预约了但是去到现场人数较少的情况，请自行判断是需要预约还是现场挂号（免费）</strong></li>
+		  		<li>本次预约仅限<span class="text-error">明天</span>就诊，预约费<span class="text-error">¥20/位</span>,预约支付成功后不能退号退款,预约费不抵扣就诊诊金药费</li>
+		  		<li>如没有你想要的时间段请酌情选择其他可选时间段，或稍后重新进入看是否有退号</li>
 	  		</ul>
 		  	<s:hidden name="id" />
 		  	<!-- appointmentService is on ValueStack, we can directly use its method and can put some param -->

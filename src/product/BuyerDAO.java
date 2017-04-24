@@ -4,14 +4,18 @@ import static org.hibernate.criterion.Example.create;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.LockOptions;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.transform.Transformers;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
@@ -259,6 +263,22 @@ public class BuyerDAO {
 		String queryString = "from Buyer where paid > 0 and sent = 0 order by date desc";
 		Query queryObject = getCurrentSession().createQuery(queryString);
 		return queryObject.list();
+	}
+	
+	public List<Map<String, String>> getMonthCount(String date) {
+		String sql = "select sent, count(*) count, sum(price) price, sum(tprice) tprice from `buyer` where date_format(date,'%Y-%m')=date_format(Date(\""+date+"\"), '%Y-%m') and paid>0 group by sent order by sent asc"; // date_format(now(),'%Y-%m')
+		List result = getCurrentSession().createSQLQuery(sql).setResultTransformer(Transformers.ALIAS_TO_ENTITY_MAP).list();
+		return result;
+		/*List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+		System.out.println(result);
+		for (String[] objs : result) {
+			Map<String, String> m = new HashMap<String, String>();
+			m.put("count", objs[0]);
+			m.put("price", objs[1]);
+			m.put("tprice", objs[2]);
+			list.add(m);
+		}
+		return list;*/
 	}
 
 	public static BuyerDAO getFromApplicationContext(ApplicationContext ctx) {

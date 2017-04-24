@@ -75,6 +75,8 @@
 					      <!-- <button type="submit" class="btn" id="dateSubmit">查询</button> -->
 				      <span class="pull-left">
 					      <button class="btn btn-warning" type="button" id="unsentBtn">未发货</button>
+					      <button type="button" id="sumBtn" class="btn">统计</button>
+					      <input type="hidden" id="sumText" />
 					      <button class="btn" name="add" type="button"><s:text name="add"/></button>
 					      <button class="btn" name="paid" type="button" url="changeSelectPaid">支付</button>
 					      <button class="btn" name="sent" type="button" url="changeSelectSent">发货</button>
@@ -233,7 +235,7 @@
 					alert("请至少选择一个买家");
 					return;
 				}
-				var valid = confirm("修改方向？") ? 1 : 0;
+				var valid = 1;//confirm("修改方向？") ? 1 : 0;
 				if (name == "sent" && valid > 0) {
 					valid = confirm("诊所发？") ? 1 : 2;
 					if (valid == 1) {
@@ -275,6 +277,10 @@
 				updateTableByUnsent();
 			})
 			
+			$("#sumBtn").click(function(){
+				alert($("#sumText").val());
+			})
+			
 			//-------------------------------function--------------------------------
 			function getSelected(){
 				var ids = [];
@@ -290,11 +296,14 @@
 			function updateTableByDate() {
 				if ("" != DATE) {
 					var url = "getBuyersByDate";
-					var data = {"date" : DATE};
-					$.get(url, data, function(data){
+					var postData = {"date" : DATE};
+					$.get(url, postData, function(data){
 						var buyers = eval(data);
-						// console.info(buyers)
 						setTableData(buyers);
+						// 设置月度总数
+						$.get("getMonthCount", postData, function(list){
+							$("#sumText").val(list);
+						}, "json")
 					}, "json");
 				}
 			}
@@ -324,7 +333,7 @@
 				$("#buyers").empty();
 				$.each(buyers, function(i){
 					var line = "<tr name='"+this.id+"' price='"+this.price+"' paid='"+this.paid+"' sent='"+this.sent+"'>";
-					line += "<td rowspan=1><p>"+(i+1)+"</p><p>"+this.id+"</p><p>"+this.date+"</p></td>";
+					line += "<td rowspan=1><p>"+(i+1)+"</p><p><a target='blank' href='../searchResult?searchPattern=id"+this.id+"'>"+this.id+"</a></p><p>"+this.date+"</p></td>";
 					
 					line += "<td rowspan=1>";
 					// var href_phone = "<a href='../searchResult?searchPattern="+this.phone+"'>"+this.phone+"</a>";
@@ -365,7 +374,7 @@
 					line += "<td><div class='btn-group btn-group-vertical'>"
 						+"<button  class='btn' name='update' value='"+this.id+"'>更新</button>"
 						+"<button  class='btn' name='del' value='"+this.id+"'><s:text name='del'/></button>"
-						+"<button  class='btn' name='show' value='id"+this.id+"'>展示</button>"
+						//+"<button  class='btn' name='show' value='id"+this.id+"'>展示</button>"
 						+"<button  class='btn' name='copy' value='"+this.id+"'>复制</button>"
 						+"</div></td>";
 					line += "</tr>";

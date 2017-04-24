@@ -8,7 +8,7 @@
         </result-types>
         
         <action name="list" method="list" class="express.ExpressAction">
-   			<result>/jsp/express/list.jsp</result>
+   			<result>/WEB-INF/jsp/express/list.jsp</result>
 		</action>  	  
         <action name="listAjax" method="listAjax" class="express.ExpressAction">
    			<result type="json">
@@ -31,11 +31,11 @@
   			</result>
 		</action> 
         <action name="searchForm" method="searchForm" class="express.ExpressAction">
-   			<result>/jsp/express/search.jsp</result>
+   			<result>/WEB-INF/jsp/express/search.jsp</result>
 		</action>  	  
         <action name="display" method="display" class="express.ExpressAction">
-   			<result name="success">/jsp/express/display.jsp</result>
-   			<result name="search">/jsp/express/search.jsp</result>
+   			<result name="success">/WEB-INF/jsp/express/display.jsp</result>
+   			<result name="search">/WEB-INF/jsp/express/search.jsp</result>
 		</action>  	  
     </package>
     

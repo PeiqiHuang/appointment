@@ -3,17 +3,17 @@
 <struts>
     <package name="user" namespace="/" extends="struts-default">
     	<action name="loginForm">
-   			<result>/jsp/user/login.jsp</result>
+   			<result>/WEB-INF/jsp/user/login.jsp</result>
 		</action>  	
         <action name="login" class="appointment.user.Login">
-   			<result name="input">/jsp/user/login.jsp</result>
+   			<result name="input">/WEB-INF/jsp/user/login.jsp</result>
    			<result name="success" type="redirectAction">tab</result>
 		</action>
     	<action name="logout" class="appointment.user.Logout">
-   			<result>/jsp/user/login.jsp</result>
+   			<result>/WEB-INF/jsp/user/login.jsp</result>
 		</action>  	
     	<action name="tab">
-   			<result>/jsp/user/tab.jsp</result>
+   			<result>/WEB-INF/jsp/user/tab.jsp</result>
 		</action>  	
     </package>
 </struts>    

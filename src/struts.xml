@@ -9,4 +9,5 @@
     <include file="appointment/board/board.xml"/>
     <include file="product/product.xml"/>
     <include file="express/express.xml"/>
+   <!--  <include file="order/order.xml"/> -->
 </struts>    

@@ -21,6 +21,12 @@ public class ProductAjaxAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String getMonthCount() {
+		Gson gson = new GsonBuilder().create();
+		result = gson.toJson(productService.getMonthCount(date));
+		return SUCCESS;
+	}
+	
 	public String getBuyersBySearch() {
 		List<Buyer> buyers = productService.getBuyersBySearch(pattern);
 		setResultJson(buyers);

@@ -7,6 +7,8 @@ import java.util.List;
 import appointment.user.User;
 import appointment.user.UserAware;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.opensymphony.xwork2.ActionSupport;
 
 public class ProductShowAction extends ActionSupport implements UserAware {
@@ -45,7 +47,7 @@ public class ProductShowAction extends ActionSupport implements UserAware {
 	public void setBuies(List<Buyer> buies) {
 		this.buies = buies;
 	}
-
+	
 	@Override
 	public void setUser(User user) {
 		// TODO Auto-generated method stub

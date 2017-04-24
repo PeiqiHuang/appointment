@@ -3,7 +3,7 @@
 <struts>
     <!-- <package name="board" namespace="/board" extends="struts-default">
         <action name="get" method="get" class="appointment.board.BoardAction">
-   			<result>/jsp/time/show.jsp</result>
+   			<result>/WEB-INF/jsp/time/show.jsp</result>
 		</action>  	  
     </package> -->
     

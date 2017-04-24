@@ -170,8 +170,8 @@
 			
 			$("#go").click(function(){
 				//放假不给下单
-				alert("1月23日-2月4日休息，暂停下单！");
-				return;
+				//alert("1月23日-2月4日休息，暂停下单！");
+				//return;
 				var SELECTED_ITEMS = getLocal();
 				// console.info(SELECTED_ITEMS)
 				if (SELECTED_ITEMS.length < 1) {
