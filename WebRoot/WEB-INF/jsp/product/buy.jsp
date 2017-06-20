@@ -96,7 +96,7 @@
    			</s:if>
    			<s:else>
 	    		<s:select label="请选择邮寄地址" id="addSelect" list="#{1:'东莞市内', 2:'广东省内', 3:'广东省外'}"/>
-	    		<p class="text-right">邮费：¥ 
+	    		<p class="text-right">邮费(含包装材料费)：¥ 
 	    			<span id="freight" name="freight">8</span>
 		    		<s:hidden name="buyer.freight" value="8"/>
 	    		</p>
