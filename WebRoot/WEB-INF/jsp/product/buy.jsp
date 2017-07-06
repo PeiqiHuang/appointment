@@ -134,6 +134,11 @@
 		$(document).ready(function(){
 			$("input").css("height", "40px");
 			
+			// 邮费默认
+			if ($("#form_buyer_freight").val() == "") {
+				$("#form_buyer_freight").val(8);
+			}
+			
 			//init
 			if ($("#form_productValid").val() == "") {
 				$("#form_productValid").val(1);

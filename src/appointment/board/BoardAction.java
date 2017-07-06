@@ -29,6 +29,16 @@ public class BoardAction extends ActionSupport implements UserAware {
 		return SUCCESS;
 	}
 	
+	public String doctors() {
+		try {
+			appointmentService.setBoardDoctors(this.getDoctors());
+		} catch (IOException e) {
+			System.out.println("set board doctors go to exception");
+			
+		}
+		return SUCCESS;
+	}
+	
 	AppointmentService appointmentService;
 
 	public AppointmentService getAppointmentService() {
@@ -47,6 +57,16 @@ public class BoardAction extends ActionSupport implements UserAware {
 
 	public void setBoard(String board) {
 		this.board = board;
+	}
+	
+	private String doctors;
+
+	public String getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(String doctors) {
+		this.doctors = doctors;
 	}
 
 	@Override

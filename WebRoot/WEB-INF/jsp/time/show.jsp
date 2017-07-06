@@ -59,15 +59,30 @@
 				  </table>
 			  	<s:form id="form_board" action="../board/set" >
 				  	<s:textarea cssStyle="width:100%" key="board" />
-				  	<ul id="tips" style="font-size:17px">
+				  	<ul id="tips_board" style="font-size:17px">
 				  		<li>18点之后开放明天的预约，请耐心等候！</li>
 				  		<li>19点之后开放明天的预约，请耐心等候！</li>
 				  		<li>明天休息，预约暂停！</li>
 				  		<li>明天的预约已满</li>
 				  		<li>明天的预约已满，请明晚18点之后预约后天的号！</li>
 				  	</ul>
-				  	<button class="btn btn-large" id="clear">清空</button>
+				  	<button class="btn btn-large" id="clear_board">清空</button>
 				  	<s:submit cssClass="btn btn-large" value="发布公告" />
+			  	</s:form>
+			  	<s:form id="form_doctor" action="../board/doctors" >
+				  	<s:textarea cssStyle="width:100%" key="doctors" />
+				  	<ul id="tips_doctors" style="font-size:17px">
+				  		<li>谢永年</li>
+				  		<li>谢朴可</li>
+				  		<li>张美行</li>
+				  		<li>谢永年，谢朴可</li>
+				  		<li>谢永年(上午)，谢朴可(下午)</li>
+				  		<li>谢永年，谢朴可</li>
+				  		<li>谢永年，张美行</li>
+				  		<li>张美行，谢朴可</li>
+				  	</ul>
+				  	<button class="btn btn-large" id="clear_doctors">清空</button>
+				  	<s:submit cssClass="btn btn-large" value="发布医生" />
 			  	</s:form>
 			  </div>
 		  </div>
@@ -111,12 +126,22 @@
 				}
 			});
 			
-			$("#clear").click(function(){
+			// board
+			$("#clear_board").click(function(){
 				$("#form_board_board").val("");
 			});
 			
-			$("#tips li").click(function(){
+			$("#tips_board li").click(function(){
 				$("#form_board_board").val($(this).text());
+			});
+			
+			// doctors
+			$("#clear_doctors").click(function(){
+				$("#form_doctor_doctors").val("");
+			});
+			
+			$("#tips_doctors li").click(function(){
+				$("#form_doctor_doctors").val($(this).text());
 			});
 		})
 	</script>

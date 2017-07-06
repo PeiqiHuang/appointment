@@ -41,6 +41,8 @@ public interface AppointmentService {
 
 	void setBoard(String board) throws IOException;
 	
+	void setBoardDoctors(String doctors) throws IOException;
+	
 	String getBoard() throws IOException;
 
 	Person getTodayPerson(String phone);
@@ -50,4 +52,7 @@ public interface AppointmentService {
 	BigInteger getMonthCount(String date);
 
 	void setSuccess(Person person);
+
+	String getBoardDoctors() throws IOException;
+
 }

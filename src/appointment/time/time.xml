@@ -36,4 +36,10 @@
    			<result type="redirectAction">show</result>
 		</action>  	  
     </package>
+    
+    <package name="doctors" namespace="/doctors" extends="struts-default">
+    	<action name="show" method="doctors" class="appointment.time.TimeAction">
+   			<result>/WEB-INF/jsp/time/doctors.jsp</result>
+		</action>
+	</package>
 </struts>    

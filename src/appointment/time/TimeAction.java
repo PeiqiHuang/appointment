@@ -31,6 +31,7 @@ public class TimeAction extends ActionSupport implements ModelDriven<Time>, User
 		times = appointmentService.showAllTime();
 		try {
 			board = appointmentService.getBoard();
+			doctors = appointmentService.getBoardDoctors();
 		} catch (IOException e) {
 			System.out.println("获取公告栏失败！");
 			e.printStackTrace();
@@ -42,6 +43,17 @@ public class TimeAction extends ActionSupport implements ModelDriven<Time>, User
 	public String del() {
 //		System.out.println("del = " + time);
 		appointmentService.deleteTime(time);
+		return SUCCESS;
+	}
+	
+	public String doctors() {
+		try {
+			doctors = appointmentService.getBoardDoctors();
+			System.out.println("doctors = " + doctors);
+		} catch (IOException e) {
+			System.out.println("获取公告栏失败！");
+			e.printStackTrace();
+		}
 		return SUCCESS;
 	}
 	
@@ -64,7 +76,16 @@ public class TimeAction extends ActionSupport implements ModelDriven<Time>, User
 	public void setBoard(String board) {
 		this.board = board;
 	}
+	
+	private String doctors;
 
+	public String getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(String doctors) {
+		this.doctors = doctors;
+	}
 	private Time time = new Time();
 
 	@Override

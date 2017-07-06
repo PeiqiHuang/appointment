@@ -20,6 +20,7 @@ public class PersonInsertAction extends ActionSupport implements ModelDriven<Per
 //		setAvailableTime(appointmentService.getAvailableTime());
 		try {
 			board = appointmentService.getBoard();
+			doctors = appointmentService.getBoardDoctors();
 //			System.out.println("person insert board ->" + board);
 		} catch (IOException e) {
 			System.out.println("获取公告栏失败！");
@@ -88,6 +89,15 @@ public class PersonInsertAction extends ActionSupport implements ModelDriven<Per
 		this.board = board;
 	}
 	
+	private String doctors;
+
+	public String getDoctors() {
+		return doctors;
+	}
+
+	public void setDoctors(String doctors) {
+		this.doctors = doctors;
+	}
 	private Person person = new Person();
 
 	@Override

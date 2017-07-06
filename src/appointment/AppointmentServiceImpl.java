@@ -227,6 +227,10 @@ public class AppointmentServiceImpl implements AppointmentService {
 	private String getBoardPath() throws IOException {
 		return getRootPath()  +File.separator + AppointmentConstant.FILE_BOARD_NAME;
 	}
+	
+	private String getBoardDoctorsPath() throws IOException {
+		return getRootPath()  +File.separator + AppointmentConstant.FILE_DOCTORS_NAME;
+	}
 
 	@Override
 	public void setBoard(String board) throws IOException {
@@ -239,6 +243,11 @@ public class AppointmentServiceImpl implements AppointmentService {
 	@Override
 	public String getBoard() throws IOException {
 		String filePath = getBoardPath();
+		return getFileString(filePath);
+	}
+	
+	private String getFileString(String filePath) throws IOException {
+		
 		if (!new File(filePath).exists()) {
 			return "";
 		}
@@ -288,6 +297,19 @@ public class AppointmentServiceImpl implements AppointmentService {
 			personDAO.setSuccess(person.getId());
 		}
 		
+	}
+
+	@Override
+	public void setBoardDoctors(String doctors) throws IOException {
+		PrintWriter pw = new PrintWriter(new FileWriter(getBoardDoctorsPath()));
+		pw.println(doctors);
+		pw.close();
+	}
+
+	@Override
+	public String getBoardDoctors() throws IOException {
+		String filePath = getBoardDoctorsPath();
+		return getFileString(filePath);
 	}
 
 }
