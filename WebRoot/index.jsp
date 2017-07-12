@@ -286,6 +286,7 @@
 	
 	<script src="js/jquery.min.js"></script>
 	<script type="text/javascript">
+		window.location.href="product/list";
 		$(document).ready(function(){
 			$("#buy").click(function(){
 				if ($("#tip").css("display") == "none")

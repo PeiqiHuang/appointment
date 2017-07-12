@@ -32,7 +32,7 @@ public class KdniaoTrackQueryAPI {
 	public static void main(String[] args) {
 //		KdniaoTrackQueryAPI api = new KdniaoTrackQueryAPI();
 		try {
-			String result = KdniaoTrackQueryAPI.get("中通", "768458428520");
+			String result = KdniaoTrackQueryAPI.get("顺丰", "687283416487");
 			System.out.print(result);
 			
 		} catch (Exception e) {

@@ -60,12 +60,21 @@
 				<div class="page-header">
 		            <h3 class="text-center">护理产品目录</h3>
 		        </div>
-	            <div class="media well" style="margin-top:-20px;">
+	            <!-- <div class="media well" style="margin-top:-20px;">
 			      <div class="media-body">
 		            <h5 class="text-center" style="text-decoration:underline;">提示</h5>
-					<!-- <p>如下方没有你想要的产品，可直接点击下单，在备注中写下你要的产品，加付款微信后确认。</p> -->
+					<p>如下方没有你想要的产品，可直接点击下单，在备注中写下你要的产品，加付款微信后确认。</p>
 					<p>如下方没有你想要的产品，可长按下方二维码添加客服微信购买。</p>
 					<img width="30%" src='../img/erweima.jpg' style="padding: 0 35%;"/>
+			      </div>
+			    </div> -->
+			    <div class="media well" id="tip"  style="margin-top:-20px;">
+			      <div class="pull-left">
+			        <img class="media-object" width="100px" src="../img/erweima.jpg">
+			      </div>
+			      <div class="media-body">
+			        <h4 class="media-heading text-center">提示</h4>
+					<p>如下方没有你想要的产品，可长按左方二维码添加客服微信购买。</p>
 			      </div>
 			    </div>
 		        		
