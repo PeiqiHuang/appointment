@@ -23,6 +23,13 @@ public class PersonAjaxAction extends ActionSupport {
 		return SUCCESS;
 	}
 	
+	public String getPersonsBySearch() {
+		List<Person> persons = appointmentService.getPersonsBySearch(searchPattern);
+		Gson gson = new GsonBuilder().setDateFormat("HH:mm").create();
+		result = gson.toJson(persons);
+		return SUCCESS;
+	}
+	
 	public String getMonthCount() {
 		result = appointmentService.getMonthCount(date).toString();
 		return SUCCESS;
@@ -42,6 +49,10 @@ public class PersonAjaxAction extends ActionSupport {
 	
 	public String getResult() {
 		return result;
+	}
+	
+	public void setResult(String result) {
+		this.result = result;
 	}
 
 //	public void setResult(String result) {
@@ -86,6 +97,16 @@ public class PersonAjaxAction extends ActionSupport {
 
 	public void setDate(String date) {
 		this.date = date;
+	}
+	
+	private String searchPattern;
+
+	public String getSearchPattern() {
+		return searchPattern;
+	}
+
+	public void setSearchPattern(String searchPattern) {
+		this.searchPattern = searchPattern;
 	}
 	
 }

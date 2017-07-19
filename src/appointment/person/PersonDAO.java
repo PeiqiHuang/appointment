@@ -265,4 +265,15 @@ public class PersonDAO {
 		String sql = "update `person` set paid = 1 where id = " + id;
 		getCurrentSession().createSQLQuery(sql).executeUpdate();
 	}
+
+	public List<Person> getPersonsBySearch(String nameOrPhone) {
+		try {
+			String queryString = "from Person where name=? or phone=? order by id desc";
+			Query queryObject = getCurrentSession().createQuery(queryString)
+					.setString(0, nameOrPhone).setString(1, nameOrPhone);
+			return queryObject.list();
+		} catch (RuntimeException re) {
+			throw re;
+		}
+	}
 }

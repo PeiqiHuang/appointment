@@ -45,6 +45,8 @@
 				      <button class="btn btn-large" name="add" type="button"><s:text name="add"/></button>
 			  		  <%-- <s:textfield key="historyDate" cssClass="input-medium search-query" onClick="WdatePicker({maxDate:'%y-%M-%d'})"/>
 				      <button type="submit" class="btn" id="dateSubmit">查询</button> --%>
+				      <s:textfield key="searchPattern" cssClass="input-medium search-query" style="height:40px;width:130px;margin-left:10px;" placeholder="名字/电话" />
+				      <button type="button" class="btn btn-large" id="searchBtn">查询</button>
 				      <span class="pull-right btn-group">
 				       	<button class="btn btn-large btn-success" id="success-count">0</span>
 				       	<button class="btn btn-large btn-info" id="wait-count">0</span>
@@ -153,9 +155,16 @@
 				$("#form").attr("action", "../insert");
 				$("#form").submit();
 			});
+			/* copy */
+			$(document).on("click", "button[name='copy']", function() {
+				/* setForm(this);
+				$("#form").attr("action", "copy?id=" + $(this).val().trim() + "&date=" + DATE);
+				$("#form").submit(); */
+				window.location.href="copy?id=" + $(this).val().trim() + "&date=" + DATE;
+			});
 			/* delete */
 			$(document).on("click", "button[name='del']", function() {
-				var con = confirm("确定删除?");
+				var con = confirm("确定删除?"); 
 				if (con) {
 					setForm(this);
 					$("#form").attr("action", "del");
@@ -179,6 +188,11 @@
 				d.setTime(d.getTime() + 86400000 );
 				$("#historyDate").val(dateToString(d));
 				saveDate();
+			});
+			
+			// 搜索
+			$("#searchBtn").click(function(){
+				updateTableBySearch();
 			});
 			
 			function setForm(btn) {
@@ -216,6 +230,20 @@
 				}
 			}
 			
+			function updateTableBySearch() {
+				var searchPattern = $("#searchPattern").val();
+				if ("" != searchPattern) {
+					var url = "getPersonsBySearch";
+					var postData = {"searchPattern" : searchPattern};
+					$.get(url, postData, function(data){
+						var persons = eval(data);
+						setTableData(persons);
+					}, "json");
+				} else {
+					updateTableByDate();
+				}
+			}
+			
 			function setTableData(persons) {
 				$("#persons").empty();
 				$.each(persons, function(i){
@@ -240,6 +268,7 @@
 					line += "<td>"+paid+"</td>"; */
 					line += "<td><button  class='btn btn-success btn-block' name='success' value='"+this.id+"'><s:text name='success'/></button></td>";
 					line += "<td><button  class='btn btn-block' name='update' value='"+this.id+"'><s:text name='update'/></button></td>";
+					line += "<td><button  class='btn btn-block' name='copy' value='"+this.id+"''><s:text name='copy'/></button></td>";
 					line += "<td><button  class='btn btn-block' name='del' value='"+this.id+"''><s:text name='del'/></button></td>";
 					line += "<input type='hidden' name='gender' value='"+this.gender+"'/>";
 					line += "<input type='hidden' name='time.id' value='"+this.time.id+"'/>";

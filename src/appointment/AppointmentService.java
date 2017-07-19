@@ -55,4 +55,7 @@ public interface AppointmentService {
 
 	String getBoardDoctors() throws IOException;
 
+	List<Person> getPersonsBySearch(String nameOrPhone);
+
+	void copyPerson(Integer id, String date);
 }

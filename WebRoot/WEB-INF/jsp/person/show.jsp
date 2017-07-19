@@ -146,7 +146,7 @@
 					line += "<td>"+gender+"</td>";
 					line += "<td>"+this.age+"</td>";
 					line += "<td>"+this.phone+"</td>";
-					line += "<td>"+this.time.time+"</td>";
+					line += "<td>"+showTime(this.time.time)+"</td>";
 					line += "<input type='hidden' name='gender' value='"+this.gender+"'/>";
 					line += "<input type='hidden' name='time.id' value='"+this.time.id+"'/>";
 					line += "<input type='hidden' name='paid' value='"+this.paid+"'/>";
@@ -155,6 +155,18 @@
 				});
 				
 				updateLabel();
+			}
+			
+			function showTime(time) {
+				switch (time) {
+					case "A": return "8-9点";
+					case "B": return "9-10点";
+					case "C": return "10-11点";
+					case "D": return "11-12点";
+					case "E": return "14-15点";
+					case "F": return "15-16点";
+					case "G": return "16-17点";
+				}
 			}
 			
 			function saveDate() {

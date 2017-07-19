@@ -70,6 +70,9 @@
         <action name="show" class="appointment.person.PersonShowAction">
    			<result>/WEB-INF/jsp/personManage/show.jsp</result>
 		</action>  	  
+        <action name="copy" class="appointment.person.PersonCopyAction">
+   			<result type="redirectAction">show</result>
+		</action> 
         <action name="del" class="appointment.person.PersonDeleteAction">
    			<result type="redirectAction">show</result>
 		</action> 
@@ -90,6 +93,10 @@
    				<param name="root">result</param>
   			</result>
 		</action> 
-		 	  
+		 <action name="getPersonsBySearch" method="getPersonsBySearch" class="appointment.person.PersonAjaxAction">
+   			<result type="json">
+   				<param name="root">result</param>
+  			</result>
+		</action>  	  
     </package>
 </struts>    

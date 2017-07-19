@@ -172,6 +172,15 @@
 				$("#form").attr("action", "copy");
 				$("#form").submit();
 			});
+			/* hide */
+			$(document).on("click", "button[name='hide']", function(event) {
+				var id = $(this).val();
+				$("tr[name='"+id+"']").css("display", "none");
+				$("#selected_price").val(0);
+				$("#selected_price").text(0);
+				//var price = parseInt($("tr[name='"+id+"']").first().attr("price"));
+				event.stopPropagation();
+			});
 			/* delete */
 			$(document).on("click", "button[name='del']", function() {
 				var con = confirm("确定删除?");
@@ -376,6 +385,7 @@
 						+"<button  class='btn' name='del' value='"+this.id+"'><s:text name='del'/></button>"
 						//+"<button  class='btn' name='show' value='id"+this.id+"'>展示</button>"
 						+"<button  class='btn' name='copy' value='"+this.id+"'>复制</button>"
+						+"<button  class='btn' name='hide' value='"+this.id+"'>隐藏</button>"
 						+"</div></td>";
 					line += "</tr>";
 					/* line += "<tr><td><button  class='btn btn-block' name='update' value='"+this.id+"'>产品</button></td></tr>"; */

@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigInteger;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -310,6 +312,32 @@ public class AppointmentServiceImpl implements AppointmentService {
 	public String getBoardDoctors() throws IOException {
 		String filePath = getBoardDoctorsPath();
 		return getFileString(filePath);
+	}
+
+	@Override
+	public List<Person> getPersonsBySearch(String nameOrPhone) {
+		return personDAO.getPersonsBySearch(nameOrPhone);
+	}
+
+	@Override
+	public void copyPerson(Integer id, String date) {
+		Person person = personDAO.findById(id);
+		Person p = new Person();
+		p.setAge(person.getAge());
+		p.setGender(person.getGender());
+		p.setName(person.getName());
+		p.setPaid(0);
+		p.setPhone(person.getPhone());
+		p.setTime(person.getTime());
+		SimpleDateFormat sdf = new SimpleDateFormat();
+		Date d = new Date();
+		try {
+			d = sdf.parse(date);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		p.setDate(d);
+		personDAO.save(p);
 	}
 
 }
