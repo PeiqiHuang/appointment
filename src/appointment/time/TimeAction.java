@@ -49,7 +49,6 @@ public class TimeAction extends ActionSupport implements ModelDriven<Time>, User
 	public String doctors() {
 		try {
 			doctors = appointmentService.getBoardDoctors();
-			System.out.println("doctors = " + doctors);
 		} catch (IOException e) {
 			System.out.println("获取公告栏失败！");
 			e.printStackTrace();

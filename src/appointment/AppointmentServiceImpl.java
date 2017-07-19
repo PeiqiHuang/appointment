@@ -280,13 +280,13 @@ public class AppointmentServiceImpl implements AppointmentService {
 		return personDAO.getPersonsByDate(date);
 	}
 	
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		ApplicationContext context = new ClassPathXmlApplicationContext("applicationContext.xml");
 		 
 		AppointmentService appointmentService = (AppointmentService) context.getBean("appointmentService");
 		
 		System.out.println(appointmentService.getAvailableTime());
-	}
+	}*/
 
 	@Override
 	public BigInteger getMonthCount(String date) {
@@ -329,7 +329,7 @@ public class AppointmentServiceImpl implements AppointmentService {
 		p.setPaid(0);
 		p.setPhone(person.getPhone());
 		p.setTime(person.getTime());
-		SimpleDateFormat sdf = new SimpleDateFormat();
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		Date d = new Date();
 		try {
 			d = sdf.parse(date);
@@ -339,5 +339,5 @@ public class AppointmentServiceImpl implements AppointmentService {
 		p.setDate(d);
 		personDAO.save(p);
 	}
-
+	
 }
