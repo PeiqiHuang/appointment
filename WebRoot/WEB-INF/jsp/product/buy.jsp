@@ -95,12 +95,15 @@
    				<s:select label="发货" id="sentSelect" name="buyer.sent" list="#{0:'未发货', 1:'诊所发公', 2:'私人发', 3:'诊所发私'}"/>
    			</s:if>
    			<s:else>
-	    		<s:select label="请选择邮寄地址" id="addSelect" list="#{1:'东莞市内', 2:'广东省内', 3:'广东省外'}"/>
-	    		<p class="text-right">邮费(含包装材料费)：¥ 
-	    			<span id="freight" name="freight">8</span>
-		    		<s:hidden name="buyer.freight" value="8"/>
-	    		</p>
-	    		<p class="text-right">（邮费超重等原因付款时可能会变动）</p>
+	    		<s:select label="请选择邮寄方式" id="waySelect" list="#{1:'中通现付', 2:'顺丰到付'}"/>
+	    		<div id="addDiv">
+		    		<s:select label="请选择邮寄地址" id="addSelect" list="#{1:'东莞市内', 2:'广东省内', 3:'广东省外', 4:'套餐包邮'}"/>
+		    		<p class="text-right">邮费(含包装材料费)：¥ 
+		    			<span id="freight" name="freight">8</span>
+			    		<s:hidden name="buyer.freight" value="8"/>
+		    		</p>
+		    		<p class="text-right">（邮费超重等原因付款时可能会变动）</p>
+	    		</div>
    			</s:else>
     		
     		
@@ -130,6 +133,7 @@
 	
 	<script type="text/javascript">
 		var TOTAL = 0;
+		//$("#duplicate").val("false");
 		
 		$(document).ready(function(){
 			$("input").css("height", "40px");
@@ -187,14 +191,29 @@
 				changeTotal();
 			});
 			
+			$(document).on("change", "#waySelect", function(){
+				var freight = 0;
+				if ($(this).val() == 1) {
+					freight = 8;
+					$("#addDiv").css("display", "");
+				} else if ($(this).val() == 2) {
+					freight = 0;
+					$("#addDiv").css("display", "none");
+				}
+				$("#freight").text(freight);
+				$("#form_buyer_freight").val(freight);
+			});
+			
 			$(document).on("change", "#addSelect", function(){
 				var freight = 0;
 				if ($(this).val() == 1) {
 					freight = 8;
 				} else if ($(this).val() == 2) {
 					freight = 10;
-				} else {
+				} else if ($(this).val() == 3) {
 					freight = 12;
+				} else if ($(this).val() == 4) {
+					freight = 0;
 				}
 				$("#freight").text(freight);
 				$("#form_buyer_freight").val(freight);
@@ -236,6 +255,9 @@
 				$("#form").append("<input type='hidden' name='buyer.price' value='"+TOTAL+"' />");
 				/* $("#form").append("<input type='hidden' name='buyer.freight' value='"+$("#freight").text()+"' />"); */
 				$("#form").append("<input type='hidden' name='buyer.tprice' value='"+(TOTAL+parseInt($("#form_buyer_freight").val()))+"' />");
+				if ($("#waySelect").val() == 2) { //顺丰到付，添加进备注
+					$("#form_buyer_remark").val("顺丰到付运费 " + $("#form_buyer_remark").val());
+				}
 				if ($("#duplicate").val() == "false") {
 					$("#duplicate").val("true");
 					$("#form").submit();
@@ -256,6 +278,8 @@
 				$("#page").attr("src", $(this).attr("url"));
 				$("#modal").modal();
 			}); */
+			
+			
 		})
 		
 		function addProduct(id, name) {
